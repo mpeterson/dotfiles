@@ -1,0 +1,7 @@
+shell -$SHELL
+caption always '%{= bd}  %-Lw%{= bG}%50>%{= rd}%n%{= rd}%f*%t%{= bd}%+Lw%< %-=%{= Bd} :: %{= Bd} %c:%s (CET)%{-}'
+setenv TZ Europe/Berlin
+autodetach on
+startup_message off
+nethack on
+vbell off
