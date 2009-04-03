@@ -1,7 +1,7 @@
 #!/bin/sh
 cd $(dirname $0)
 VC_DIR=$(pwd)
-find . -iname ".*" -type f -o -type d -not -name "$(basename .)" -not -name .git -maxdepth 1 | \
+find . -maxdepth 1 -iname ".*" -type f -o -type d -not -name "$(basename .)" -not -name .git | \
     while read path; do
         if [ "X$(basename "$path")" = "X.git" ]; then
             continue
