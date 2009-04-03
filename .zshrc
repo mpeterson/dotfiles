@@ -100,10 +100,11 @@ case $TERM in
     precmd(){
       local git_branch
       git_branch=`git symbolic-ref HEAD 2>/dev/null|awk '{sub(/^refs\/heads\//, "", $1); print " ("$1")"}'`
+      python_virtualenv=`basename $VIRTUAL_ENV 2>/dev/null|awk '/./ {print "["$1"] "}'`
       local UC=$fg_bold[white]              # user's color
       [ $UID -eq "0" ] && UC=$fg_bold[red]  # root's color
 
-      PROMPT="%{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
+      PROMPT="%{$fg_bold[red]%}$python_virtualenv%{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
       print -Pn "\e]0;%n@%m: %~\a"
     }
     preexec(){
@@ -114,10 +115,11 @@ case $TERM in
     precmd(){
       local git_branch
       git_branch=`git symbolic-ref HEAD 2>/dev/null|awk '{sub(/^refs\/heads\//, "", $1); print " ("$1")"}'`
+      python_virtualenv=`basename $VIRTUAL_ENV 2>/dev/null|awk '/./ {print "["$1"] "}'`
       local UC=$fg_bold[white]              # user's color
       [ $UID -eq "0" ] && UC=$fg_bold[red]  # root's color
 
-      PROMPT="%{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
+      PROMPT="%{$fg_bold[red]%}$python_virtualenv%{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
       print -Pn "\e]0;%n@%m: %~\a"
     }
     preexec(){
@@ -132,10 +134,11 @@ case $TERM in
       precmd(){
         local git_branch
         git_branch=`git symbolic-ref HEAD 2>/dev/null|awk '{sub(/^refs\/heads\//, "", $1); print " ("$1")"}'`
+        python_virtualenv=`basename $VIRTUAL_ENV 2>/dev/null|awk '/./ {print "["$1"] "}'`
         local UC=$fg_bold[white]              # user's color
         [ $UID -eq "0" ] && UC=$fg_bold[red]  # root's color
 
-        PROMPT="%{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
+        PROMPT="%{$fg_bold[red]%}$python_virtualenv{$fg_bold[blue]%}%n%{$UC%}@%{$fg_bold[blue]%}%m %~$git_branch%{$UC%}%(!.#.\$) %{$reset_color%}"
       }
     else
       precmd(){ PROMPT="%n@%m: %~$git_branch%(!.#.\$)" }
