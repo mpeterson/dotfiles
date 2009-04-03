@@ -164,6 +164,9 @@ Django environment detected.
 EDITOR = os.environ.get('EDITOR', 'vim')
 EDIT_CMD = '\e'
 
+# This binds the Tab key to the completion function
+readline.parse_and_bind('tab: complete')
+
 class EditableBufferInteractiveConsole(InteractiveConsole):
     def __init__(self, *args, **kwargs):
         self.last_buffer = [] # This holds the last executed statement
