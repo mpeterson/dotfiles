@@ -52,6 +52,9 @@ wbz(){
   wget -O- "$*"|tar xjf -
 }
 
+# Python
+PYTHONSTARTUP=$HOME/.pythonrc
+
 # Behave UTF-8
 export LANG=en_US.UTF-8
 stty erase 
