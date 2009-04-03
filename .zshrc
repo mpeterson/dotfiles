@@ -149,7 +149,7 @@ autoload run-help
 bindkey "^N" run-help
 
 # Do incremental search 
-bindkey "^R" history-incremental-search-backward
+bindkey "^R" history-incremental-pattern-search-backward
 
 case $TERM in
   xterm*)
