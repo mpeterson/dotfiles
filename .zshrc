@@ -104,13 +104,13 @@ wbz(){
 }
 
 # Python
-PYTHONSTARTUP=$HOME/.pythonrc
+export PYTHONSTARTUP=$HOME/.pythonrc
 
 # pager
-PAGER='less'
+export PAGER='less'
 
 # editor
-EDITOR='vim'
+export EDITOR='vim'
 
 # Behave UTF-8
 export LANG=en_US.UTF-8
