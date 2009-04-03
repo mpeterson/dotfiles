@@ -146,7 +146,7 @@ bindkey "\e[2~" quoted-insert
 
 # Show man page of the current command
 autoload run-help
-bindkey "" run-help
+bindkey "^N" run-help
 
 # Do incremental search 
 bindkey "^R" history-incremental-search-backward
