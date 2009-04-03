@@ -106,6 +106,12 @@ wbz(){
 # Python
 PYTHONSTARTUP=$HOME/.pythonrc
 
+# pager
+PAGER='less'
+
+# editor
+EDITOR='vim'
+
 # Behave UTF-8
 export LANG=en_US.UTF-8
 stty erase 
