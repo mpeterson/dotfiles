@@ -42,6 +42,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias vi='vim'
 alias grep='grep --colour'
+alias myip="wget -O - -q myip.dk |grep '\"Box\"' | egrep -o '[0-9.]+'"
 
 #complex alias
 wgz(){
