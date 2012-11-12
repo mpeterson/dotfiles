@@ -12,6 +12,7 @@ runtime! debian.vim
 
 " load bundles from .vim/bundle/
 call pathogen#infect()
+call pathogen#helptags()
 
 " Set window title
 set title
