@@ -23,6 +23,7 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
+colorscheme solarized
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -144,6 +145,11 @@ endfunction
 command! -bang CheckForUpdates :call CheckForUpdates(<bang>0) 
 
 " Vim + Py == The ultimate IDE for Py
+if has('python')
+
+endif
+  echo "WARNING: Some parts of the config require vim compiled with +python"
+if has('python')
 python << EOF
 import os
 import sys
@@ -152,6 +158,7 @@ for p in sys.path:
   if os.path.isdir(p):
     vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 EOF
+endif
 
 " Need to execute $ ctags -R -f ~/.vim/tags/python.ctags /usr/lib/python2.5/
 set tags+=$HOME/.vim/tags/python.ctags
@@ -163,12 +170,14 @@ inoremap <Nul> <C-x><C-o>
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
+if has('python')
 python << EOL
 import vim
 def EvaluateCurrentRange():
   eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 EOL
 map <C-h> :py EvaluateCurrentRange()
+endif
 
 " vimrc file for following the coding standards specified in PEP 7 & 8.
 "
