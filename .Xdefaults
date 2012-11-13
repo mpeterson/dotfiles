@@ -1,6 +1,6 @@
 ! Font
 !URxvt*font:					xft:Inconsolata-dz for Powerline:size=10
-xterm*faceName: Menlo for Powerline:pixelsize=13
+xterm*faceName: Menlo for Powerline:pixelsize=14
 
 *background: #002b36
 *foreground: #657b83

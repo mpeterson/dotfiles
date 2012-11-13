@@ -43,5 +43,8 @@ t(){
 }
 compdef _task t=task
 
+# Set default user to allow hidding it on prompt when using default
+export DEFAULT_USER="mpeterson"
+
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin::/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0
