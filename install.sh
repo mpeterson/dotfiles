@@ -5,7 +5,7 @@
 
 # Show a quick help summary.
 function usage {
-  echo "Usage: $(basename "$0") [ --dry-run ] [ --prefix=$HOME ] [ --do-not-update ]";
+  echo "Usage: $(basename "$0") [ --dry-run ] [ --prefix=$HOME ] [ --do-not-update ] [ --uninstall ]";
 }
 
 function update {
@@ -19,6 +19,7 @@ function update {
 
 # Parse the command-line arguments.
 is_dry_run=false;
+is_uninstall=false;
 do_not_update=false;
 dry_run=;
 target_dir="$HOME";
@@ -36,6 +37,10 @@ while (($#)); do
       exit 0;
       ;;
     --do-not-update)
+      do_not_update=true;
+      ;;
+    --uninstall)
+      is_uninstall=true;
       do_not_update=true;
       ;;
     *)
@@ -225,6 +230,7 @@ fi;
 
 # Install dotfiles by symlinking the files from the dotfiles repository.
 has_created_links=false;
+has_uninstalled=false;
 for file in "${source_files[@]}"; do
   target="$target_dir/$file";
   target_container_dir="$(dirname "$target")";
@@ -249,9 +255,14 @@ for file in "${source_files[@]}"; do
   if ! [ -L "$target" ]; then
     $dry_run ln -vs "$relative_source" "$target";
     has_created_links=true;
+  elif [ -L "$target" -a $is_uninstall = true ]; then
+    $dry_run rm -v "$target";
+    [ "$target_container_dir" = "$HOME" -a -d "$target_container_dir" ] || $dry_run rmdir -p -v --ignore-fail-on-non-empty "$target_container_dir";
+    has_uninstalled=true;
   fi;
 done;
 echo 'INSTALLING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
-$has_created_links || echo "All of dotfiles's files were symlinked already.";
+$is_uninstall || $has_created_links || echo "All of dotfiles' files were symlinked already.";
+$is_uninstall && $has_uninstalled && echo "All of dotfiles' files' symlinks were removed.";
 echo 'Done.';
 
