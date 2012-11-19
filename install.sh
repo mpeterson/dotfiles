@@ -9,10 +9,12 @@ function usage {
 }
 
 function update {
+  echo 'UPDATING REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
   $dry_run git pull
   $dry_run git submodule update --init --recursive
   $dry_run git submodule foreach 'git clean -dfx'
   $dry_run git clean -dfx
+  echo 'UPDATING REPO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 }
 
 # Parse the command-line arguments.
@@ -58,10 +60,9 @@ fi;
 $is_dry_run && echo 'Dry run mode. Not actually executing anything.';
 $do_not_update && echo 'Not updating dotfiles repository nor any submodule.';
 
-echo '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-
 $do_not_update || update;
 
+echo 'INSTALLING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 # Make sure the target directory is OK.
 if [ -z "$target_dir" ]; then
   echo "The target directory prefix is empty.";
@@ -116,8 +117,7 @@ for file in "${source_files[@]}"; do
   if [ -L "$target_dir/$file" -o -e "$target_dir/$file" ]; then
     # If source and target point to the same file, it is OK to replace
     # the target.
-    [ "$source_dir/$file" -ef "$target_dir/$file" ] && continue;
-
+    [ "$source_dir/$file" -ef "$target_dir/$file" ] && continue; 
     # If the contents of the two files is the same, it is OK to replace
     # the target.
     diff -rq "$source_dir/$file" "$target_dir/$file" > /dev/null 2>&1 && continue;
@@ -251,7 +251,7 @@ for file in "${source_files[@]}"; do
     has_created_links=true;
   fi;
 done;
-echo '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
+echo 'INSTALLING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 $has_created_links || echo "All of dotfiles's files were symlinked already.";
 echo 'Done.';
 
