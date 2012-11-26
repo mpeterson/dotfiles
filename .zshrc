@@ -43,6 +43,17 @@ t(){
 }
 compdef _task t=task
 
+# Some sane git defaults
+if [ $(command -v 'git') ]
+then
+  git config --global color.ui auto
+  git config --global color.diff auto
+  git config --global core.excludesfile "$HOME/.gitignore"
+  git config --global alias.recent "reflog -20 --date=relative"
+  git config --global alias.ci commit
+  git config --global alias.st status
+  git config --global alias.co checkout
+fi
 
 # Automatically load TMUX
 if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
