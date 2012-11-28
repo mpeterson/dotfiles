@@ -62,6 +62,12 @@ imap <C-P>, <ESC><C-P>,a
 " Control + t opens a new tab
 nmap <C-T> :tabnew<CR>
 
+" Control+<movement> to move between windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
 " Uncomment the following to have Vim load indentation rules according to the
 " detected filetype. Per default Debian Vim only load filetype specific
 " plugins.
