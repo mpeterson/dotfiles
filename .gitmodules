@@ -25,3 +25,15 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule ".vim/bundle/vim-snipmate.git"]
+	path = .vim/bundle/vim-snipmate.git
+	url = https://github.com/garbas/vim-snipmate
+[submodule ".vim/bundle/tlib_vim.git"]
+	path = .vim/bundle/tlib_vim.git
+	url = https://github.com/tomtom/tlib_vim
+[submodule ".vim/bundle/vim-addon-mw-utils.vim"]
+	path = .vim/bundle/vim-addon-mw-utils.vim
+	url = https://github.com/MarcWeber/vim-addon-mw-utils
+[submodule ".vim/bundle/snipmate-snippets.git"]
+	path = .vim/bundle/snipmate-snippets.git
+	url = https://github.com/honza/snipmate-snippets
