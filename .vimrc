@@ -69,7 +69,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " Map fuzzy finder's functions
-nmap <leader>t :FufCoverageFile<cr>
+nmap <leader>f :FufCoverageFile<cr>
 nmap <leader>b :FufBuffer<cr>
 nmap <leader>t :FufTaggedFile<cr>
 
