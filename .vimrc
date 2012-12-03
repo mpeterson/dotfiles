@@ -68,6 +68,11 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" Map fuzzy finder's functions
+nmap <leader>t :FufCoverageFile<cr>
+nmap <leader>b :FufBuffer<cr>
+nmap <leader>t :FufTaggedFile<cr>
+
 " Uncomment the following to have Vim load indentation rules according to the
 " detected filetype. Per default Debian Vim only load filetype specific
 " plugins.
