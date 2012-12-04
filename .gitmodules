@@ -39,7 +39,7 @@
 	url = https://github.com/honza/snipmate-snippets
 [submodule ".vim/bundle/vim-markdown.git"]
 	path = .vim/bundle/vim-markdown.git
-	url = https://github.com/plasticboy/vim-markdown.git
+	url = https://github.com/tpope/vim-markdown.git
 [submodule ".vim/bundle/FuzzyFinder.git"]
 	path = .vim/bundle/FuzzyFinder.git
 	url = git://github.com/vim-scripts/FuzzyFinder.git
