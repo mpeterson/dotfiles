@@ -73,6 +73,9 @@ nmap <leader>f :FufCoverageFile<cr>
 nmap <leader>b :FufBuffer<cr>
 nmap <leader>t :FufTaggedFile<cr>
 
+" Map NERDTree
+nmap <leader>n :NERDTreeToggle<cr>
+
 " Uncomment the following to have Vim load indentation rules according to the
 " detected filetype. Per default Debian Vim only load filetype specific
 " plugins.
