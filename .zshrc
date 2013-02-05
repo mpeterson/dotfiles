@@ -35,6 +35,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias ls="ls -l"
 
+# Enable History Incremental Search
+bindkey -M viins \\C-R history-incremental-search-backward
+
 # Need to make a function instead of alias because we want to use
 # setopt no_complete_aliases which expands aliases to their commands
 # Python script can be found at https://github.com/mpeterson/toolbox
