@@ -11,7 +11,7 @@ function usage {
 function update {
   echo 'UPDATING REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
   $dry_run git pull
-  $dry_run git submodule update --init --recursive
+  $dry_run git submodule update --init --recursive --remote
   $dry_run git submodule foreach 'git clean -dfx'
   $dry_run git clean -dfx
   echo 'UPDATING REPO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
