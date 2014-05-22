@@ -2,7 +2,7 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-set nocompatible                  " enable all features
+set nocompatible                  " enable all features, required here by Vundle
 filetype off " required here
 
 " set the runtime path to include Vundle and initialize
@@ -73,24 +73,6 @@ endif
 " Remove search hilighting with ^N
 nmap <silent> <C-N> :silent noh<CR>
 
-" highlight a '( )' block of text
-nmap <C-P>9 m[va(:sleep 350m<CR>`[
-
-" highlight a '[ ]' block of text
-nmap <C-P>[ m[va[:sleep 350m<CR>`[
-
-" highlight a '{ }' block of text
-nmap <C-P>] m[va{:sleep 350m<CR>`[
-
-" highlight a '< >' block of text
-nmap <C-P>, m[va<:sleep 350m<CR>`[
-
-" enable these commands from 'insert' mode as well
-imap <C-P>9 <ESC><C-P>9a
-imap <C-P>[ <ESC><C-P>[a
-imap <C-P>] <ESC><C-P>]a
-imap <C-P>, <ESC><C-P>,a
-
 " Control + t opens a new tab
 nmap <C-T> :tabnew<CR>
 
@@ -137,9 +119,7 @@ set laststatus=2
 au FileType make setlocal noexpandtab
 
 " Mark trailing spaces
-set list listchars=tab:->,trail:.,extends:> 
-"highlight WhitespaceEOL ctermbg=red guibg=red
-"match WhitespaceEOL /\s\+$\| \+\ze\t/
+set list listchars=tab:->,trail:.,extends:>
 
 if &term == "screen"
    exec "set t_kN=\<ESC>[6;*~"
