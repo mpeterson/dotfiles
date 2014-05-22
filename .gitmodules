@@ -1,64 +1,8 @@
-[submodule ".vim/bundle/vim-colors-solarized.git"]
-  path = .vim/bundle/vim-colors-solarized.git
-  url = git://github.com/altercation/vim-colors-solarized.git
-  branch = master
-[submodule ".vim/bundle/vim-pasta.git"]
-  path = .vim/bundle/vim-pasta.git
-  url = git://github.com/sickill/vim-pasta.git
-  branch = master
-[submodule ".vim/bundle/surround.git"]
-  path = .vim/bundle/surround.git
-  url = https://github.com/vim-scripts/surround.vim
-  branch = master
-[submodule ".vim/bundle/nerdtree.git"]
-  path = .vim/bundle/nerdtree.git
-  url = https://github.com/scrooloose/nerdtree.git
-  branch = master
-[submodule ".vim/bundle/vim-commentary.git"]
-  path = .vim/bundle/vim-commentary.git
-  url = git://github.com/tpope/vim-commentary.git
-  branch = master
-[submodule ".vim/bundle/vim-fugitive.git"]
-  path = .vim/bundle/vim-fugitive.git
-  url = git://github.com/tpope/vim-fugitive.git
-  branch = master
-[submodule ".vim/bundle/vim-indent-object.git"]
-  path = .vim/bundle/vim-indent-object.git
-  url = https://github.com/michaeljsmith/vim-indent-object.git
-  branch = master
-[submodule ".vim/bundle/supertab.git"]
-  path = .vim/bundle/supertab.git
-  url = https://github.com/ervandew/supertab.git
-  branch = master
 [submodule ".oh-my-zsh"]
   path = .oh-my-zsh
   url = https://github.com/robbyrussell/oh-my-zsh.git
   branch = master
-[submodule ".vim/bundle/vim-snipmate.git"]
-  path = .vim/bundle/vim-snipmate.git
-  url = https://github.com/garbas/vim-snipmate
-  branch = master
-[submodule ".vim/bundle/tlib_vim.git"]
-  path = .vim/bundle/tlib_vim.git
-  url = https://github.com/tomtom/tlib_vim
-  branch = master
-[submodule ".vim/bundle/vim-addon-mw-utils.vim"]
-  path = .vim/bundle/vim-addon-mw-utils.vim
-  url = https://github.com/MarcWeber/vim-addon-mw-utils
-  branch = master
-[submodule ".vim/bundle/vim-snippets"]
-  path = .vim/bundle/vim-snippets.git
-  url = https://github.com/honza/vim-snippets
-  branch = master
-[submodule ".vim/bundle/vim-markdown.git"]
-  path = .vim/bundle/vim-markdown.git
-  url = https://github.com/tpope/vim-markdown.git
-  branch = master
-[submodule ".vim/bundle/FuzzyFinder.git"]
-  path = .vim/bundle/FuzzyFinder.git
-  url = https://github.com/vim-scripts/FuzzyFinder.git
-  branch = master
-[submodule ".vim/bundle/L9.git"]
-  path = .vim/bundle/L9.git
-  url = https://github.com/vim-scripts/L9.git
+[submodule ".vim/bundle/Vundle.vim"]
+  path = .vim/bundle/Vundle.vim
+  url = https://github.com/gmarik/Vundle.vim.git
   branch = master

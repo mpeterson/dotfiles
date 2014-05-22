@@ -1,26 +1,55 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
-
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" load bundles from .vim/bundle/
-call pathogen#infect()
-call pathogen#helptags()
+set nocompatible                  " enable all features
+filetype off " required here
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" # Github plugins
+
+" ## Appareance
+Plugin 'altercation/vim-colors-solarized'
+
+" ## Movements
+Plugin 'sickill/vim-pasta'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat' " required by surround, commentary
+
+" ## Navigation
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+
+" ## Integrations
+Plugin 'tpope/vim-fugitive' " Git
+
+" ## Completion
+Plugin 'Shougo/neocomplete'
+
+" ### Snippets
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+
+" ## Code specific
+" ### HTML
+Plugin 'mattn/emmet-vim'
+
+" ### Markdown
+Plugin 'tpope/vim-markdown'
+
+call vundle#end()
+
+filetype plugin indent on    " required
 
 " Set window title
 set title
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -68,20 +97,11 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-" Map fuzzy finder's functions
-nmap <leader>f :FufCoverageFile<cr>
-nmap <leader>b :FufBuffer<cr>
-nmap <leader>t :FufTaggedFile<cr>
-
 " Map NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
 
-" Uncomment the following to have Vim load indentation rules according to the
-" detected filetype. Per default Debian Vim only load filetype specific
-" plugins.
-if has("autocmd")
-  filetype indent on
-endif
+" Enable neocomplete
+let g:neocomplete#enable_at_startup = 1
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -104,7 +124,7 @@ set autoindent                    " guess indentation
 set hlsearch                      " highlight the searchterms
 set textwidth=0                   " don't wrap words
 set ruler                         " show ruler
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%04.4B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2
 
 " disable expand tabs for makefiles
