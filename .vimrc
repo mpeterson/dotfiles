@@ -44,6 +44,9 @@ Plugin 'mattn/emmet-vim'
 " ### Markdown
 Plugin 'tpope/vim-markdown'
 
+" ### Python
+Plugin 'klen/python-mode'
+
 call vundle#end()
 
 filetype plugin indent on    " required
@@ -103,6 +106,9 @@ nmap <leader>n :NERDTreeToggle<cr>
 " Enable neocomplete
 let g:neocomplete#enable_at_startup = 1
 
+" Enable Python-mode
+let g:pymode = 1
+
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set nocompatible                  " enable all features
@@ -142,4 +148,3 @@ endif
 
 " load custom configs specific
 runtime! custom/functions.vim
-runtime! custom/python.vim
