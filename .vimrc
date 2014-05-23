@@ -50,6 +50,9 @@ Plugin 'klen/python-mode'
 " ### Go
 Plugin 'jnwhiteh/vim-golang'
 
+" ### PHP
+Plugin 'spf13/PIV'
+
 call vundle#end()
 
 filetype plugin indent on    " required
