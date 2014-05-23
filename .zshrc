@@ -32,7 +32,8 @@ export EDITOR=vim
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git battery django git pip python taskwarrior virtualenvwrapper vi-mode svn docker tmux tmuxinator)
 
-ZSH_TMUX_AUTOSTART="true"
+# only autostart a tmux when we are connecting via ssh
+[ -n "$SSH_TTY" ] && ZSH_TMUX_AUTOSTART="true"
 
 source $ZSH/oh-my-zsh.sh
 
