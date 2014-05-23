@@ -7,6 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="blinks"
 
+export EDITOR=vim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -58,5 +59,5 @@ then
   git config --global alias.ci commit
   git config --global alias.st status
   git config --global alias.co checkout
-  git config --global core.editor `which vim`
+  git config --global core.editor `which $EDITOR`
 fi
