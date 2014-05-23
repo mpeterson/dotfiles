@@ -29,7 +29,10 @@ ZSH_THEME="blinks"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git battery django git pip python taskwarrior virtualenvwrapper vi-mode svn docker)
+plugins=(git battery django git pip python taskwarrior virtualenvwrapper vi-mode svn docker tmux tmuxinator)
+
+ZSH_TMUX_AUTOSTART_ONCE=true
+ZSH_TMUX_ITERM2=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -58,13 +61,3 @@ then
   git config --global alias.co checkout
   git config --global core.editor `which vim`
 fi
-
-# Automatically load TMUX
-if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
-then
-        STARTED_TMUX=1; export STARTED_TMUX
-        sleep 1
-        ( (tmux has-session -t remote && tmux attach-session -t remote) || (tmux new-session -s remote) ) && exit 0
-        echo "tmux failed to start"
-fi
-
