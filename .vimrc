@@ -47,6 +47,9 @@ Plugin 'tpope/vim-markdown'
 " ### Python
 Plugin 'klen/python-mode'
 
+" ### Go
+Plugin 'jnwhiteh/vim-golang'
+
 call vundle#end()
 
 filetype plugin indent on    " required
