@@ -91,6 +91,9 @@ let g:neocomplete#enable_at_startup = 1
 " Enable Python-mode
 let g:pymode = 1
 
+" ctrlp config
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set nocompatible                  " enable all features
