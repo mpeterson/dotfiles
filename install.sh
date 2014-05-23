@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# "Install" the files from the dotfiles repository by symlinking them from the
-# home directory.
+# "Install" the files from the dotfiles repository by symlinking them from the # home directory.
 
 # Show a quick help summary.
 function usage {
@@ -252,12 +251,12 @@ for file in "${source_files[@]}"; do
     done;
   fi;
   relative_source="$relative_source/$file";
-  if ! [ -L "$target" ]; then
+  if [ ! -L "$target" -a $is_uninstall = false ]; then
     $dry_run ln -vs "$relative_source" "$target";
     has_created_links=true;
   elif [ -L "$target" -a $is_uninstall = true ]; then
-    $dry_run rm -v "$target";
-    [ "$target_container_dir" = "$HOME" -a -d "$target_container_dir" ] || $dry_run rmdir -p -v --ignore-fail-on-non-empty "$target_container_dir";
+    $dry_run rm -vrf "$target";
+    [ "$target_container_dir" = "$HOME" -a -d "$target_container_dir" ] || $dry_run rm -fd "$target_container_dir";
     has_uninstalled=true;
   fi;
 done;
