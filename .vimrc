@@ -96,10 +96,10 @@
     nmap <C-T> :tabnew<CR>
 
     " Control+<movement> to move between windows
-    map <c-j> <c-w>j
-    map <c-k> <c-w>k
-    map <c-l> <c-w>l
-    map <c-h> <c-w>h
+    map <C-Down> <c-w>j
+    map <C-Up> <c-w>k
+    map <C-Right> <c-w>l
+    map <C-Left> <c-w>h
 " }
 
 " Sane defaults {
