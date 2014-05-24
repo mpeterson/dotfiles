@@ -14,3 +14,7 @@ fi
 
 # Enable History Incremental Search
 bindkey -M viins '^R' history-incremental-search-backward
+
+# Aliases
+alias ls='ls -l'
+alias lsa='ls -la'
