@@ -16,5 +16,5 @@ fi
 bindkey -M viins '^R' history-incremental-search-backward
 
 # Aliases
-alias ls='ls -l'
+alias ls="`whence ls` -l" # Use whence so we don't overwrite the previous alias
 alias lsa='ls -la'
