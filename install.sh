@@ -260,7 +260,7 @@ for file in "${source_files[@]}"; do
     has_uninstalled=true;
   fi;
 done;
-if [ $(command -v 'vim') ]
+if [ $(command -v 'vim') ]; then
     vim +PluginInstall +PluginClean +qall
 fi
 echo 'INSTALLING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
