@@ -260,6 +260,9 @@ for file in "${source_files[@]}"; do
     has_uninstalled=true;
   fi;
 done;
+if [ $(command -v 'vim') ]
+    vim +PluginInstall +PluginClean +qall
+fi
 echo 'INSTALLING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 $is_uninstall || $has_created_links || echo "All of dotfiles' files were symlinked already.";
 $is_uninstall && $has_uninstalled && echo "All of dotfiles' files' symlinks were removed.";
