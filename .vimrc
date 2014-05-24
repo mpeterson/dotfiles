@@ -44,6 +44,9 @@
     " }
 
     " Code specific {
+        " Go {
+            Plugin 'jnwhiteh/vim-golang'
+        " }
         " HTML {
             Plugin 'mattn/emmet-vim'
         " }
@@ -51,17 +54,11 @@
         " Markdown {
             Plugin 'tpope/vim-markdown'
         " }
-
-        " Python {
-            Plugin 'klen/python-mode'
-        " }
-
-        " Go {
-            Plugin 'jnwhiteh/vim-golang'
-        " }
-
         " PHP {
             Plugin 'spf13/PIV'
+        " }
+        " Python {
+            Plugin 'klen/python-mode'
         " }
     " }
 
