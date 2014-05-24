@@ -12,37 +12,30 @@
         Plugin 'gmarik/Vundle.vim'  " let Vundle manage Vundle, required
         Plugin 'tpope/vim-repeat'   " required by surround, commentary
     " }
-
     " Appareance {
         Plugin 'altercation/vim-colors-solarized'
         Plugin 'zhaocai/GoldenView.Vim'
     " }
-
     " Movements {
         Plugin 'sickill/vim-pasta'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-commentary'
     " }
-
     " Navigation {
         Plugin 'kien/ctrlp.vim'
         Plugin 'scrooloose/nerdtree'
     " }
-
     " Integrations {
         Plugin 'tpope/vim-fugitive' " Git
     " }
-
     " Completion {
         Plugin 'Shougo/neocomplete'
     " }
-
     " Snippets {
         Plugin 'honza/vim-snippets'
         Plugin 'Shougo/neosnippet-snippets'
         Plugin 'Shougo/neosnippet.vim'
     " }
-
     " Code specific {
         " Go {
             Plugin 'jnwhiteh/vim-golang'
@@ -68,7 +61,6 @@
     call vundle#end()
     filetype plugin indent on    " required
 " }
-
 " Plugin's configurations {
     " Colorscheme and background
     set background=dark
