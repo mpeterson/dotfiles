@@ -12,3 +12,5 @@ fi
 
 # Customize to your needs...
 
+# Enable History Incremental Search
+bindkey -M viins '^R' history-incremental-search-backward
