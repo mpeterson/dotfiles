@@ -39,7 +39,8 @@
 
     " Snippets {
         Plugin 'honza/vim-snippets'
-        Plugin 'SirVer/ultisnips'
+        Plugin 'Shougo/neosnippet-snippets'
+        Plugin 'Shougo/neosnippet.vim'
     " }
 
     " Code specific {
