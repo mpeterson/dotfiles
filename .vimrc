@@ -15,6 +15,7 @@
 
     " Appareance {
         Plugin 'altercation/vim-colors-solarized'
+        Plugin 'zhaocai/GoldenView.Vim'
     " }
 
     " Movements {
