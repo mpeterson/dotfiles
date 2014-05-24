@@ -50,7 +50,10 @@
         " HTML {
             Plugin 'mattn/emmet-vim'
         " }
-
+        " Javascript {
+            Plugin 'pangloss/vim-javascript'
+            Plugin 'othree/javascript-libraries-syntax.vim'
+        " }
         " Markdown {
             Plugin 'tpope/vim-markdown'
         " }
