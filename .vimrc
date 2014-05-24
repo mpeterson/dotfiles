@@ -82,6 +82,7 @@
 
     " Enable Python-mode
     let g:pymode = 1
+    let g:pymode_rope = 0
 
     " ctrlp config
     let g:ctrlp_cmd = 'CtrlPMixed'
