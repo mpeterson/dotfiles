@@ -20,6 +20,7 @@
         Plugin 'sickill/vim-pasta'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-commentary'
+        Plugin 'Lokaltog/vim-easymotion'
     " }
     " Navigation {
         Plugin 'kien/ctrlp.vim'
