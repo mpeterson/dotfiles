@@ -28,6 +28,7 @@
     " }
     " Integrations {
         Plugin 'tpope/vim-fugitive' " Git
+        Plugin 'christoomey/vim-tmux-navigator' " tmux
     " }
     " Completion {
         Plugin 'Shougo/neocomplete'
@@ -112,10 +113,11 @@
     nmap <C-T> :tabnew<CR>
 
     " Control+<movement> to move between windows
-    map <c-j> <c-w>j
-    map <c-k> <c-w>k
-    map <c-l> <c-w>l
-    map <c-h> <c-w>h
+    " NOTE: This is commented to allow for the better tmux integration
+    " map <c-j> <c-w>j
+    " map <c-k> <c-w>k
+    " map <c-l> <c-w>l
+    " map <c-h> <c-w>h
 
     " <leader>+<movement> to move between tabs
     map <silent> <leader>l :tabnext<CR>
