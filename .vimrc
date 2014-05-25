@@ -86,6 +86,9 @@
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
     smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+
+    " GoldenView disable default mapping
+    let g:goldenview__enable_default_mapping = 0
 " }
 
 " Custom functions/helpers {
@@ -113,6 +116,13 @@
     map <c-k> <c-w>k
     map <c-l> <c-w>l
     map <c-h> <c-w>h
+
+    " <leader>+<movement> to move between tabs
+    map <silent> <leader>l :tabnext<CR>
+    map <silent> <leader>h :tabprevious<CR>
+
+    " GoldenView split
+    nmap <silent> <leader>s <Plug>GoldenViewSplit
 " }
 
 " Sane defaults {
