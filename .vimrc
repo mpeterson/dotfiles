@@ -125,6 +125,10 @@
 
     " GoldenView split
     nmap <silent> <leader>s <Plug>GoldenViewSplit
+
+    " easy motion mappings
+    "map  / <Plug>(easymotion-sn)
+    "omap / <Plug>(easymotion-tn)
 " }
 
 " Sane defaults {
