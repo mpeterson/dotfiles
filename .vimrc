@@ -9,7 +9,7 @@
 
 " Plugins {
     " Dependencies {
-        Plugin 'gmarik/Vundle.vim'  " let Vundle manage Vundle, required
+        Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
         Plugin 'tpope/vim-repeat'   " required by surround, commentary
     " }
     " Appareance {
@@ -29,6 +29,7 @@
     " Integrations {
         Plugin 'tpope/vim-fugitive' " Git
         Plugin 'christoomey/vim-tmux-navigator' " tmux
+        Plugin 'vim-pandoc/vim-pandoc-after'
     " }
     " Completion {
         Plugin 'Shougo/neocomplete'
@@ -50,7 +51,9 @@
             Plugin 'othree/javascript-libraries-syntax.vim'
         " }
         " Markdown {
-            Plugin 'tpope/vim-markdown'
+            Plugin 'vim-pandoc/vim-pandoc'
+            Plugin 'vim-pandoc/vim-pandoc-syntax'
+            Plugin 'dhruvasagar/vim-table-mode'
         " }
         " PHP {
             Plugin 'spf13/PIV'
@@ -65,14 +68,20 @@
 " }
 " Plugin's configurations {
     " Colorscheme and background
-    set background=dark
+    set background=light
     colorscheme solarized
 
     " Map NERDTree
     nmap <leader>n :NERDTreeToggle<cr>
 
     " Enable neocomplete
+    let g:acp_enableAtStartup = 0
     let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
 
     " Enable Python-mode
     let g:pymode = 1
@@ -83,10 +92,19 @@
 
     " Enable neosnippet compatiblity
     let g:neosnippet#enable_snipmate_compatibility=1
+    " Plugin key-mappings.
     imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
     smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+
+    " enable bibtool completion
+    let g:pandoc#biblio#use_bibtool = 1
+    " vim-pandoc-after integration with neocomplete
+    let g:pandoc#after#modules#enabled = ["neosnippets", "tablemode" ]
+
+    " Change table-mode corner
+    let g:table_mode_corner="|"
 
     " GoldenView disable default mapping
     let g:goldenview__enable_default_mapping = 0
@@ -211,6 +229,9 @@
 
     " Mark trailing spaces
     set list listchars=tab:->,trail:.,extends:>
+
+    " enable spell check for Markdown files
+    autocmd FileType Markdown setlocal spell
 " }
 
 " Environment fixes {
