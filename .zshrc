@@ -39,6 +39,8 @@ bindkey -M viins '^R' history-incremental-search-backward
 # Aliases
 alias ls="`whence ls` -l" # Use whence so we don't overwrite the previous alias
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 ## 0. End startup profiling
 #
 
