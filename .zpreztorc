@@ -31,15 +31,15 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
   'command-not-found' \
   'archive' \
   'git' \
   'history-substring-search' \
-  'python' \
   'rsync' \
   'ssh' \
   'tmux' \
+  'python' \
+  'completion' \
   'prompt'
 
 #

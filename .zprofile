@@ -77,7 +77,7 @@ if [[ ! -d "$TMPPREFIX" ]]; then
 fi
 
 # Some sane git defaults
-if [ $(command -v 'git') -a ! $(git config user.name) ]
+if [ $(command -v 'git') -a -z "$(git config user.name)" ]
 then
   echo 'Seems you have git installed'
   echo 'What username do you want to use for git?'
