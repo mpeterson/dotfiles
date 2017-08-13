@@ -117,8 +117,20 @@
     set background=light
     colorscheme solarized
 
-    " Map NERDTree
-    nmap <leader>n :NERDTreeToggle<cr>
+    " NERDTree {
+        nmap <leader>n :NERDTreeToggle<cr>
+        " Load Nerdtree when a folder is opened, as per:
+        " https://github.com/junegunn/vim-plug/issues/424
+        augroup nerd_loader
+          autocmd!
+          autocmd VimEnter * silent! autocmd! FileExplorer
+          autocmd BufEnter,BufNew *
+                \  if isdirectory(expand('<amatch>'))
+                \|   call plug#load('nerdtree')
+                \|   execute 'autocmd! nerd_loader'
+                \| endif
+        augroup END
+    " }
 
     " neocomplete {
         " Enable neocomplete
