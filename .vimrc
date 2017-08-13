@@ -34,6 +34,8 @@
         Plug 'Shougo/neosnippet.vim'
     " }
     " Code specific {
+        Plug 'neomake/neomake'
+
         " Go {
             Plug 'jnwhiteh/vim-golang'
         " }
@@ -53,7 +55,7 @@
             Plug 'spf13/PIV'
         " }
         " Python {
-            Plug 'klen/python-mode'
+            Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         " }
     " }
 
@@ -114,40 +116,90 @@
     " Map NERDTree
     nmap <leader>n :NERDTreeToggle<cr>
 
-    " Enable neocomplete
-    let g:acp_enableAtStartup = 0
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
+    " neocomplete {
+        " Enable neocomplete
+        let g:acp_enableAtStartup = 0
+        let g:neocomplete#enable_at_startup = 1
+        let g:neocomplete#enable_auto_select = 1
+        let g:neocomplete#enable_smart_case = 1
+        let g:neocomplete#sources#syntax#min_keyword_length = 2
 
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
+        "increase limit for tag cache files
+        let g:neocomplete#sources#tags#cache_limit_size = 16777216 " 16MB
 
-    " Enable Python-mode
-    let g:pymode = 1
-    let g:pymode_rope = 0
+        " always use completions from all buffers
+        if !exists('g:neocomplete#same_filetypes')
+            let g:neocomplete#same_filetypes = {}
+        endif
+        let g:neocomplete#same_filetypes._ = '_'
+
+        " Fix E121: Undefined variable: g:neocomplete#force_omni_input_patterns
+        if !exists('g:neocomplete#force_omni_input_patterns')
+          let g:neocomplete#force_omni_input_patterns = {}
+        endif
+
+        " neocomplete using jedi for python
+        autocmd FileType python setlocal omnifunc=jedi#completions
+        let g:jedi#completions_enabled = 0
+        let g:jedi#auto_vim_configuration = 0
+        let g:neocomplete#force_omni_input_patterns.python =
+        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+        " alternative pattern: '\h\w*\|[^. \t]\.\w*'
+
+        " Plugin key-mappings.
+        inoremap <expr><C-g>     neocomplete#undo_completion()
+        inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+        " Recommended key-mappings.
+        " <CR>: cancel popup and insert newline.
+        inoremap <silent> <CR> <C-r>=neocomplete#smart_close_popup()<CR><CR>
+        " <TAB>: completion.
+        inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+        " <C-h>, <BS>: close popup and delete backword char.
+        inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <expr> <BS>  neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <expr> <C-y> neocomplete#close_popup()
+        inoremap <expr> <C-e> neocomplete#cancel_popup()
+
+        " Enable neosnippet compatiblity
+        let g:neosnippet#enable_snipmate_compatibility = 1
+        let g:neosnippet#snippets_directory = '~/.vim/plugged/vim-snippets'
+        " Plugin key-mappings.
+        imap <C-k> <Plug>(neosnippet_expand_or_jump)
+        smap <C-k> <Plug>(neosnippet_expand_or_jump)
+        xmap <C-k> <Plug>(neosnippet_expand_target)
+        smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+        " For conceal markers.
+        if has('conceal')
+          set conceallevel=2 concealcursor=niv
+        endif
+
+        " enable bibtool completion
+        let g:pandoc#biblio#use_bibtool = 1
+        " vim-pandoc-after integration with neocomplete
+        let g:pandoc#after#modules#enabled = ["neosnippets", "tablemode" ]
+    " }
+
+    " jedi {
+        let g:jedi#use_tabs_not_buffers = 1
+        let g:jedi#show_call_signatures = "1"
+    " }
 
     " ctrlp config
     let g:ctrlp_cmd = 'CtrlPMixed'
-
-    " Enable neosnippet compatiblity
-    let g:neosnippet#enable_snipmate_compatibility=1
-    " Plugin key-mappings.
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-    smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-
-    " enable bibtool completion
-    let g:pandoc#biblio#use_bibtool = 1
-    " vim-pandoc-after integration with neocomplete
-    let g:pandoc#after#modules#enabled = ["neosnippets", "tablemode" ]
 
     " Change table-mode corner
     let g:table_mode_corner="|"
 
     " GoldenView disable default mapping
     let g:goldenview__enable_default_mapping = 0
+
+    " neomake {
+        autocmd! BufWritePost * Neomake
+        let g:neomake_open_list = 2
+    " }
 " }
 
 " Custom functions/helpers {
