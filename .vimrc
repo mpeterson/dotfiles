@@ -37,7 +37,7 @@
         Plug 'neomake/neomake'
 
         " Go {
-            Plug 'jnwhiteh/vim-golang'
+            Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
         " }
         " HTML {
             Plug 'mattn/emmet-vim'
