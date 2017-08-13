@@ -13,7 +13,7 @@
     " Movements {
         Plug 'sickill/vim-pasta'
         Plug 'tpope/vim-surround'
-        Plug 'tpope/vim-commentary'
+        Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
         Plug 'easymotion/vim-easymotion'
     " }
     " Navigation {
@@ -200,6 +200,10 @@
         autocmd! BufWritePost * Neomake
         let g:neomake_open_list = 2
     " }
+
+    " vim-commentary
+    map  gc  <Plug>Commentary
+    nmap gcc <Plug>CommentaryLine
 " }
 
 " Custom functions/helpers {
