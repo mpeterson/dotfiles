@@ -9,6 +9,7 @@
     " Appareance {
         Plug 'altercation/vim-colors-solarized'
         Plug 'zhaocai/GoldenView.Vim'
+        Plug 'mhinz/vim-signify'
     " }
     " Movements {
         Plug 'sickill/vim-pasta'
