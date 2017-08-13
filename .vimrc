@@ -105,6 +105,7 @@
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store
     set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
     set laststatus=2
+    let mapleader=' '
 
     if has('conceal')
         set conceallevel=1
