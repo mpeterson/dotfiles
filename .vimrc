@@ -23,7 +23,6 @@
     " Integrations {
         Plug 'tpope/vim-fugitive' " Git
         Plug 'christoomey/vim-tmux-navigator' " tmux
-        Plug 'vim-pandoc/vim-pandoc-after'
     " }
     " Completion {
         Plug 'Shougo/neocomplete'
@@ -48,8 +47,9 @@
         " }
         " Markdown {
             Plug 'vim-pandoc/vim-pandoc'
-            Plug 'vim-pandoc/vim-pandoc-syntax'
-            Plug 'dhruvasagar/vim-table-mode'
+            Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'pandoc' }
+            Plug 'dhruvasagar/vim-table-mode', { 'for': 'pandoc' }
+            Plug 'vim-pandoc/vim-pandoc-after', { 'for': 'pandoc' }
         " }
         " PHP {
             Plug 'spf13/PIV'
