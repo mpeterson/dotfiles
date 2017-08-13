@@ -1,8 +1,8 @@
-" Setup Plugins Support {
-    call plug#begin('~/.vim/plugged')
-" }
-
 " Plugins {
+    " Setup Plugins Support {
+        call plug#begin('~/.vim/plugged')
+    " }
+
     " Dependencies {
         Plug 'tpope/vim-repeat'   " required by surround, commentary
     " }
@@ -59,6 +59,53 @@
 
     call plug#end()
 " }
+
+" Sane defaults {
+    " The following are commented out as they cause vim to behave a lot
+    " differently from regular Vi. They are highly recommended though.
+    set nocompatible                                    " enable all features
+
+    syntax on                                           " syntax highlighting
+    set title                                           " Set window title
+    set showcmd                                         " Show (partial) command in status line.
+    set showmatch                                       " Show matching brackets.
+    set ignorecase                                      " Do case insensitive matching
+    set smartcase                                       " Do smart case matching
+    set hidden                                          " Hide buffers when they are abandoned
+    set ttymouse=xterm2                                 " tty mouse xterm
+    set mouse=a                                         " Enable mouse usage (all modes) in terminals
+    set backspace=indent,eol,start                      " :help i_backsp and :h 'backspace' for more info
+    set tabstop=4                                       " Number of spaces for the tabstop
+    set shiftwidth=4                                    " (Auto)indent uses 2 characters
+    set expandtab                                       " spaces instead of tabs
+    set autoindent                                      " guess indentation
+    set hlsearch                                        " highlight the searchterms
+    set textwidth=0                                     " don't wrap words
+    set ruler                                           " show ruler
+    set number                                          " show line numbers
+    set viewoptions=folds,options,cursor,unix,slash     " unix/windows compatibility
+    set foldenable                                      " enable folds by default
+    set foldmethod=syntax                               " fold via syntax of files
+    set foldlevelstart=99                               " open all folds by default
+    set encoding=utf-8                                  " set encoding for text
+    set autoread                                        " auto reload if file saved externally
+    set fileformats+=mac                                " add mac to auto-detection of file format line endings
+    set nrformats-=octal                                " always assume decimal numbers
+    set wildmenu                                        " show list for autocomplete
+    set wildmode=list:full
+    set wildignorecase
+    set splitbelow
+    set splitright
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store
+    set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+    set laststatus=2
+
+    if has('conceal')
+        set conceallevel=1
+        set listchars+=conceal:Δ
+    endif
+" }
+
 " Plugin's configurations {
     " Colorscheme and background
     set background=light
@@ -140,52 +187,6 @@
     " easy motion mappings
     "map  / <Plug>(easymotion-sn)
     "omap / <Plug>(easymotion-tn)
-" }
-
-" Sane defaults {
-    " The following are commented out as they cause vim to behave a lot
-    " differently from regular Vi. They are highly recommended though.
-    set nocompatible                                    " enable all features
-
-    syntax on                                           " syntax highlighting
-    set title                                           " Set window title
-    set showcmd                                         " Show (partial) command in status line.
-    set showmatch                                       " Show matching brackets.
-    set ignorecase                                      " Do case insensitive matching
-    set smartcase                                       " Do smart case matching
-    set hidden                                          " Hide buffers when they are abandoned
-    set ttymouse=xterm2                                 " tty mouse xterm
-    set mouse=a                                         " Enable mouse usage (all modes) in terminals
-    set backspace=indent,eol,start                      " :help i_backsp and :h 'backspace' for more info
-    set tabstop=4                                       " Number of spaces for the tabstop
-    set shiftwidth=4                                    " (Auto)indent uses 2 characters
-    set expandtab                                       " spaces instead of tabs
-    set autoindent                                      " guess indentation
-    set hlsearch                                        " highlight the searchterms
-    set textwidth=0                                     " don't wrap words
-    set ruler                                           " show ruler
-    set number                                          " show line numbers
-    set viewoptions=folds,options,cursor,unix,slash     " unix/windows compatibility
-    set foldenable                                      " enable folds by default
-    set foldmethod=syntax                               " fold via syntax of files
-    set foldlevelstart=99                               " open all folds by default
-    set encoding=utf-8                                  " set encoding for text
-    set autoread                                        " auto reload if file saved externally
-    set fileformats+=mac                                " add mac to auto-detection of file format line endings
-    set nrformats-=octal                                " always assume decimal numbers
-    set wildmenu                                        " show list for autocomplete
-    set wildmode=list:full
-    set wildignorecase
-    set splitbelow
-    set splitright
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store
-    set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-    set laststatus=2
-
-    if has('conceal')
-        set conceallevel=1
-        set listchars+=conceal:Δ
-    endif
 " }
 
 " vim file/folder management {
