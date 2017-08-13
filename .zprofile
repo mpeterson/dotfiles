@@ -42,9 +42,12 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+export GOPATH=$HOME/go
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  $GOPATH/bin
   $path
 )
 
@@ -98,3 +101,5 @@ then
       git config --global user.email "$git_mail"
   fi
 fi
+
+
