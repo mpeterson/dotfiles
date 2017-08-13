@@ -1,70 +1,63 @@
 " Setup Plugins Support {
-    set nocompatible  " enable all features, required here by Vundle
-    filetype off      " required here
-
-    " set the runtime path to include Vundle and initialize
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
+    call plug#begin('~/.vim/plugged')
 " }
 
 " Plugins {
     " Dependencies {
-        Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
-        Plugin 'tpope/vim-repeat'   " required by surround, commentary
+        Plug 'tpope/vim-repeat'   " required by surround, commentary
     " }
     " Appareance {
-        Plugin 'altercation/vim-colors-solarized'
-        Plugin 'zhaocai/GoldenView.Vim'
+        Plug 'altercation/vim-colors-solarized'
+        Plug 'zhaocai/GoldenView.Vim'
     " }
     " Movements {
-        Plugin 'sickill/vim-pasta'
-        Plugin 'tpope/vim-surround'
-        Plugin 'tpope/vim-commentary'
-        Plugin 'Lokaltog/vim-easymotion'
+        Plug 'sickill/vim-pasta'
+        Plug 'tpope/vim-surround'
+        Plug 'tpope/vim-commentary'
+        Plug 'easymotion/vim-easymotion'
     " }
     " Navigation {
-        Plugin 'kien/ctrlp.vim'
-        Plugin 'scrooloose/nerdtree'
+        Plug 'ctrlpvim/ctrlp.vim'
+        Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     " }
     " Integrations {
-        Plugin 'tpope/vim-fugitive' " Git
-        Plugin 'christoomey/vim-tmux-navigator' " tmux
-        Plugin 'vim-pandoc/vim-pandoc-after'
+        Plug 'tpope/vim-fugitive' " Git
+        Plug 'christoomey/vim-tmux-navigator' " tmux
+        Plug 'vim-pandoc/vim-pandoc-after'
     " }
     " Completion {
-        Plugin 'Shougo/neocomplete'
+        Plug 'Shougo/neocomplete'
     " }
     " Snippets {
-        Plugin 'honza/vim-snippets'
-        Plugin 'Shougo/neosnippet-snippets'
-        Plugin 'Shougo/neosnippet.vim'
+        Plug 'honza/vim-snippets'
+        Plug 'Shougo/neosnippet-snippets'
+        Plug 'Shougo/neosnippet.vim'
     " }
     " Code specific {
         " Go {
-            Plugin 'jnwhiteh/vim-golang'
+            Plug 'jnwhiteh/vim-golang'
         " }
         " HTML {
-            Plugin 'mattn/emmet-vim'
+            Plug 'mattn/emmet-vim'
         " }
         " Javascript {
-            Plugin 'pangloss/vim-javascript'
-            Plugin 'othree/javascript-libraries-syntax.vim'
+            Plug 'pangloss/vim-javascript'
+            Plug 'othree/javascript-libraries-syntax.vim'
         " }
         " Markdown {
-            Plugin 'vim-pandoc/vim-pandoc'
-            Plugin 'vim-pandoc/vim-pandoc-syntax'
-            Plugin 'dhruvasagar/vim-table-mode'
+            Plug 'vim-pandoc/vim-pandoc'
+            Plug 'vim-pandoc/vim-pandoc-syntax'
+            Plug 'dhruvasagar/vim-table-mode'
         " }
         " PHP {
-            Plugin 'spf13/PIV'
+            Plug 'spf13/PIV'
         " }
         " Python {
-            Plugin 'klen/python-mode'
+            Plug 'klen/python-mode'
         " }
     " }
 
-    call vundle#end()
-    filetype plugin indent on    " required
+    call plug#end()
 " }
 " Plugin's configurations {
     " Colorscheme and background

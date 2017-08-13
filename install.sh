@@ -261,7 +261,11 @@ for file in "${source_files[@]}"; do
   fi;
 done;
 if [ $(command -v 'vim') ]; then
-    vim +PluginInstall +PluginClean +qall
+    if ! [ -f "~/.vim/autoload/plug.vim" ]; then
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+    vim +PlugUpdate +PlugClean! +qall
 fi
 echo 'INSTALLING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 $is_uninstall || $has_created_links || echo "All of dotfiles' files were symlinked already.";
