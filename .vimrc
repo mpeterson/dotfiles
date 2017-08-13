@@ -33,7 +33,10 @@
         Plug 'Shougo/neosnippet.vim'
     " }
     " Code specific {
-        Plug 'neomake/neomake'
+        " General {
+            Plug 'neomake/neomake'
+            Plug 'tpope/vim-endwise'
+        " }
 
         " Go {
             Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
