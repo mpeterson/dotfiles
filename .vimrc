@@ -25,6 +25,7 @@
     " }
     " Integrations {
         Plug 'tpope/vim-fugitive' " Git
+        Plug 'christoomey/vim-conflicted' " On top of tpope/fugitive
         Plug 'christoomey/vim-tmux-navigator' " tmux
     " }
     " Completion {
@@ -105,7 +106,7 @@
     set splitbelow
     set splitright
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store
-    set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+    set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]\ %{ConflictedVersion()}
     set laststatus=2
     let mapleader=' '
 
@@ -221,6 +222,10 @@
 
     " GoldenView disable default mapping
     let g:goldenview__enable_default_mapping = 0
+
+    " vertical splits for diffs
+    " https://github.com/tpope/vim-fugitive/issues/508
+    set diffopt+=vertical
 
     " neomake {
         autocmd! BufWritePost * Neomake
