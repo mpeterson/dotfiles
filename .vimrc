@@ -29,7 +29,13 @@
         Plug 'christoomey/vim-tmux-navigator' " tmux
     " }
     " Completion {
-        Plug 'Shougo/neocomplete'
+        if has('nvim')
+          Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        else
+          Plug 'Shougo/deoplete.nvim'
+          Plug 'roxma/nvim-yarp'
+          Plug 'roxma/vim-hug-neovim-rpc'
+        endif
     " }
     " Snippets {
         Plug 'honza/vim-snippets'
@@ -62,6 +68,7 @@
             Plug 'spf13/PIV'
         " }
         " Python {
+            Plug 'zchee/deoplete-jedi'
             Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         " }
     " }
@@ -81,7 +88,9 @@
     set ignorecase                                      " Do case insensitive matching
     set smartcase                                       " Do smart case matching
     set hidden                                          " Hide buffers when they are abandoned
-    set ttymouse=xterm2                                 " tty mouse xterm
+    if !has('nvim')
+        set ttymouse=xterm2                             " tty mouse xterm
+    endif
     set mouse=a                                         " Enable mouse usage (all modes) in terminals
     set backspace=indent,eol,start                      " :help i_backsp and :h 'backspace' for more info
     set tabstop=4                                       " Number of spaces for the tabstop
@@ -143,58 +152,34 @@
         augroup END
     " }
 
-    " neocomplete {
-        " Enable neocomplete
-        let g:acp_enableAtStartup = 0
-        let g:neocomplete#enable_at_startup = 1
-        let g:neocomplete#enable_auto_select = 1
-        let g:neocomplete#enable_smart_case = 1
-        let g:neocomplete#sources#syntax#min_keyword_length = 2
+    " deoplete {
+        " Enable
+        let g:deoplete#enable_at_startup = 1
+        let g:deoplete#enable_smart_case = 1
 
-        "increase limit for tag cache files
-        let g:neocomplete#sources#tags#cache_limit_size = 16777216 " 16MB
-
-        " always use completions from all buffers
-        if !exists('g:neocomplete#same_filetypes')
-            let g:neocomplete#same_filetypes = {}
-        endif
-        let g:neocomplete#same_filetypes._ = '_'
-
-        " Fix E121: Undefined variable: g:neocomplete#force_omni_input_patterns
-        if !exists('g:neocomplete#force_omni_input_patterns')
-          let g:neocomplete#force_omni_input_patterns = {}
+        if !exists('g:deoplete#omni#input_patterns')
+            let g:deoplete#omni#input_patterns = {}
         endif
 
-        " neocomplete using jedi for python
-        autocmd FileType python setlocal omnifunc=jedi#completions
-        let g:jedi#completions_enabled = 0
-        let g:jedi#auto_vim_configuration = 0
-        let g:neocomplete#force_omni_input_patterns.python =
-        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-        " alternative pattern: '\h\w*\|[^. \t]\.\w*'
+
+        " Disable the candidates in Comment/String syntaxes.
+        call deoplete#custom#source('_',
+                    \ 'disabled_syntaxes', ['Comment', 'String'])
+
+        autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
         " Plugin key-mappings.
-        inoremap <expr><C-g>     neocomplete#undo_completion()
-        inoremap <expr><C-l>     neocomplete#complete_common_string()
+        " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+        xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-        " Recommended key-mappings.
-        " <CR>: cancel popup and insert newline.
-        inoremap <silent> <CR> <C-r>=neocomplete#smart_close_popup()<CR><CR>
-        " <TAB>: completion.
-        inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-        " <C-h>, <BS>: close popup and delete backword char.
-        inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
-        inoremap <expr> <BS>  neocomplete#smart_close_popup()."\<C-h>"
-        inoremap <expr> <C-y> neocomplete#close_popup()
-        inoremap <expr> <C-e> neocomplete#cancel_popup()
-
-        " Enable neosnippet compatiblity
-        let g:neosnippet#enable_snipmate_compatibility = 1
-        let g:neosnippet#snippets_directory = '~/.vim/plugged/vim-snippets'
-        " Plugin key-mappings.
-        imap <C-k> <Plug>(neosnippet_expand_or_jump)
-        smap <C-k> <Plug>(neosnippet_expand_or_jump)
-        xmap <C-k> <Plug>(neosnippet_expand_target)
+        " SuperTab like snippets behavior.
+        " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+        "imap <expr><TAB>
+        " \ pumvisible() ? "\<C-n>" :
+        " \ neosnippet#expandable_or_jumpable() ?
+        " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
         smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
         \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -210,6 +195,7 @@
     " }
 
     " jedi {
+        let g:jedi#completions_enabled = 0
         let g:jedi#show_call_signatures = "1"
     " }
 
