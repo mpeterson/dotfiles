@@ -10,6 +10,8 @@
         Plug 'altercation/vim-colors-solarized'
         Plug 'zhaocai/GoldenView.Vim'
         Plug 'mhinz/vim-signify'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
     " }
     " Movements {
         Plug 'sickill/vim-pasta'
@@ -117,6 +119,13 @@
     " Colorscheme and background
     set background=light
     colorscheme solarized
+
+    " vim-airline {
+    let g:airline_powerline_fonts = 0
+    let g:airline_theme = 'bubblegum'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#whitespace#enabled = 0
+    " }
 
     " NERDTree {
         nmap <leader>n :NERDTreeToggle<cr>
