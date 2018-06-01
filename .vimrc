@@ -91,7 +91,7 @@
     set hlsearch                                        " highlight the searchterms
     set textwidth=0                                     " don't wrap words
     set ruler                                           " show ruler
-    set number                                          " show line numbers
+    set number relativenumber                           " show line numbers (hybrid mode)
     set viewoptions=folds,options,cursor,unix,slash     " unix/windows compatibility
     set foldenable                                      " enable folds by default
     set foldmethod=syntax                               " fold via syntax of files
