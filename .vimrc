@@ -220,6 +220,9 @@
     " vim-commentary
     map  gc  <Plug>Commentary
     nmap gcc <Plug>CommentaryLine
+
+    " vim-signify
+    let g:signify_vcs_list = [ 'git' ]
 " }
 
 " Custom functions/helpers {
