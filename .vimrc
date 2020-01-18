@@ -37,6 +37,7 @@
           Plug 'roxma/nvim-yarp'
           Plug 'roxma/vim-hug-neovim-rpc'
         endif
+        Plug 'Shougo/echodoc.vim'
     " }
     " Snippets {
         Plug 'honza/vim-snippets'
@@ -241,6 +242,15 @@
 
     " vim-signify
     let g:signify_vcs_list = [ 'git' ]
+
+    " Plugin: Shougo/echodoc.vim {
+        let g:echodoc#enable_at_startup = 1
+        if exists('*nvim_open_win')
+            let g:echodoc#type = 'floating'
+        else
+            let g:echodoc#type = 'virtual'
+        endif
+    " }
 " }
 
 " Custom functions/helpers {
