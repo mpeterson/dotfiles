@@ -239,7 +239,35 @@
 
     " neomake {
         call neomake#configure#automake('nrwi', 500)
-        let g:neomake_open_list = 2
+        let g:neomake_open_list = 0
+
+        let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+        let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
+        let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+        let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+
+        let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+        let g:neomake_go_gometalinter_maker = {
+          \ 'args': [
+          \   '--tests',
+          \   '--enable-gc',
+          \   '--concurrency=3',
+          \   '--fast',
+          \   '-D', 'aligncheck',
+          \   '-D', 'dupl',
+          \   '-D', 'gocyclo',
+          \   '-D', 'gotype',
+          \   '-E', 'misspell',
+          \   '-E', 'unused',
+          \   '%:p:h',
+          \ ],
+          \ 'append_file': 0,
+          \ 'errorformat':
+          \   '%E%f:%l:%c:%trror: %m,' .
+          \   '%W%f:%l:%c:%tarning: %m,' .
+          \   '%E%f:%l::%trror: %m,' .
+          \   '%W%f:%l::%tarning: %m'
+          \ }
     " }
 
     " vim-commentary
