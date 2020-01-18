@@ -43,6 +43,7 @@ typeset -gU cdpath fpath mailpath path
 # )
 
 export GOPATH=$HOME/go
+export GO111MODULE=on
 
 # Set the list of directories that Zsh searches for programs.
 path=(
