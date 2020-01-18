@@ -222,6 +222,7 @@
 
     " ctrlp config
     let g:ctrlp_cmd = 'CtrlPMixed'
+    let g:ctrlp_mruf_relative = 1
 
     " Change table-mode corner
     let g:table_mode_corner="|"
