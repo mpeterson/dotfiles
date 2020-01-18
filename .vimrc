@@ -40,7 +40,7 @@
         Plug 'Shougo/echodoc.vim'
     " }
     " Snippets {
-        Plug 'honza/vim-snippets'
+        "Plug 'honza/vim-snippets'
         Plug 'Shougo/neosnippet-snippets'
         Plug 'Shougo/neosnippet.vim'
     " }
@@ -51,7 +51,9 @@
         " }
 
         " Go {
-            Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+            Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+            Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+            Plug 'sebdah/vim-delve'
         " }
         " HTML {
             Plug 'mattn/emmet-vim'
@@ -195,12 +197,12 @@
 
         " SuperTab like snippets behavior.
         " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-        "imap <expr><TAB>
-        " \ pumvisible() ? "\<C-n>" :
-        " \ neosnippet#expandable_or_jumpable() ?
-        " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        imap <expr><TAB>
+         \ pumvisible() ? "\<C-n>" :
+         \ neosnippet#expandable_or_jumpable() ?
+         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
         smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+         \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
         " For conceal markers.
         if has('conceal')
@@ -242,6 +244,30 @@
 
     " vim-signify
     let g:signify_vcs_list = [ 'git' ]
+
+    " vim-go {
+    let g:go_highlight_build_constraints = 1
+    let g:go_highlight_extra_types = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_types = 1
+    let g:go_auto_sameids = 1
+    let g:go_fmt_command = "goimports"
+    let g:go_auto_type_info = 1
+    let g:go_addtags_transform = "snakecase"
+    let g:go_snippet_engine = "neosnippet"
+    " }
+
+    " Plugin: zchee/deoplete-go {
+        " Enable completing of go pointers
+        let g:deoplete#sources#go#pointer = 1
+
+        " Enable autocomplete of unimported packages
+        let g:deoplete#sources#go#unimported_packages = 0
+    " }
 
     " Plugin: Shougo/echodoc.vim {
         let g:echodoc#enable_at_startup = 1
@@ -290,6 +316,20 @@
     " easy motion mappings
     "map  / <Plug>(easymotion-sn)
     "omap / <Plug>(easymotion-tn)
+
+    " close a window with ctrl+x
+    nmap <c-x> <c-w>c
+
+    " Language: Go {
+    au FileType go nmap <leader>d :GoDef<cr>
+    au FileType go nmap <leader>r :GoReferrers<cr>
+    au FileType go nmap <leader>gt :GoDeclsDir<cr>
+    au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+    au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+    au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+    au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+    au FileType go nmap <F10> :GoTest -short<cr>
+    " }
 " }
 
 " vim file/folder management {
@@ -329,6 +369,14 @@
 
     " enable spell check for Markdown files
     autocmd FileType Markdown setlocal spell
+
+    " Language: Go {
+    au FileType go set noexpandtab
+    au FileType go set shiftwidth=4
+    au FileType go set softtabstop=4
+    au FileType go set tabstop=4
+    au FileType go set nolist
+    " }
 " }
 
 " Environment fixes {
