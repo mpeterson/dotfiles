@@ -230,6 +230,9 @@
     " GoldenView disable default mapping
     let g:goldenview__enable_default_mapping = 0
 
+    " Disable tmux navigator when zooming the Vim pane
+    let g:tmux_navigator_disable_when_zoomed = 1
+
     " vertical splits for diffs
     " https://github.com/tpope/vim-fugitive/issues/508
     set diffopt+=vertical
