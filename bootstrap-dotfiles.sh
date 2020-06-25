@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ### CONFIG ###
-DOTFILES_GIT=git@github.com:mpeterson/dotfiles.git
+DOTFILES_GIT=https://github.com/mpeterson/dotfiles.git
 ##############
 
 apt=$(command -v apt-get)
