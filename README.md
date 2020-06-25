@@ -4,7 +4,7 @@ The management system was taken from the [elegant solution that Atlassian publis
 
 ## Install
 
-`curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/.bin/install.sh | /bin/bash`
+`curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/bootstrap-dotfiles.sh | /bin/bash`
 
 ## Usage
 
