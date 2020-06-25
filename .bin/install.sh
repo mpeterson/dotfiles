@@ -56,27 +56,29 @@ elif [ -n "$brew" ]; then
 fi
 
 git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
-function config() {
+function dotfiles() {
   /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
-mkdir -p .config-backup
-config checkout
+mkdir -p .dotfiles-backup
+dotfiles checkout
 if [ $? = 0 ]; then
   echo "Checked out config."
 else
   echo "Backing up pre-existing dot files."
-  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
 fi
-config checkout
-config config status.showUntrackedFiles no
+dotfiles checkout
+dotfiles config status.showUntrackedFiles no
 
 # Install zprezto, with version pinning
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 pushd "${ZDOTDIR:-$HOME}/.zprezto"
 git checkout ff91c8d410df3e6141248474389051c7ddcaf80a
+# continue with prezto-contrib
+git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
 popd
 
 # Install vim-plug for nvim
-sh -c 'curl -fLo "${$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+sh -c 'curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim +PlugUpdate +PlugClean! +qall

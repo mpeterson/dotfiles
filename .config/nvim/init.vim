@@ -1,6 +1,6 @@
 " Plugins {
     " Setup Plugins Support {
-        call plug#begin('~/.local/share/nvim/site/autoload/plug.vim')
+        call plug#begin('~/.local/share/nvim/plugged')
     " }
 
     " Dependencies {
@@ -176,12 +176,11 @@
     " deoplete {
         " Enable
         let g:deoplete#enable_at_startup = 1
-        let g:deoplete#enable_smart_case = 1
 
-        if !exists('g:deoplete#omni#input_patterns')
-            let g:deoplete#omni#input_patterns = {}
-        endif
+        " Use smartcase.
+	call deoplete#custom#option('smart_case', v:true)
 
+        call deoplete#custom#var('omni', 'input_patterns', {})
 
         " Disable the candidates in Comment/String syntaxes.
         call deoplete#custom#source('_',
@@ -368,18 +367,18 @@
    " persistent undo
    if exists('+undofile')
        set undofile
-       set undodir=~/.vim/.cache/undo
+       set undodir=~/.local/share/nvim/cache/undo
    endif
 
    " backups
    set backup
-   set backupdir=~/.vim/.cache/backup
+   set backupdir=~/.local/share/nvim/cache/backup
 
    " swap files
-   set directory=~/.vim/.cache/swap
+   set directory=~/.local/share/nvim/cache/swap
    set noswapfile
 
-   call EnsureExists('~/.vim/.cache')
+   call EnsureExists('~/.local/share/nvim/cache')
    call EnsureExists(&undodir)
    call EnsureExists(&backupdir)
    call EnsureExists(&directory)
