@@ -1,0 +1,5 @@
+# Dotfiles
+
+## Install
+
+`curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/.bin/install.sh | /bin/bash`

@@ -1,6 +1,6 @@
 " Plugins {
     " Setup Plugins Support {
-        call plug#begin('~/.vim/plugged')
+        call plug#begin('~/.local/share/nvim/site/autoload/plug.vim')
     " }
 
     " Dependencies {
@@ -317,7 +317,7 @@
               call mkdir(expand(a:path))
           endif
       endfunction " }
-      " detect OS { 
+      " detect OS {
         let s:is_windows = has('win32') || has('win64')
         let s:is_cygwin = has('win32unix')
         let s:is_macvim = has('gui_macvim')

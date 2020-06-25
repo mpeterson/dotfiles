@@ -1,11 +1,4 @@
 #
-# Sets Prezto options.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-#
 # General
 #
 
@@ -29,18 +22,26 @@ zstyle ':prezto:load' pmodule \
   'editor' \
   'history' \
   'directory' \
-  'spectrum' \
   'utility' \
   'command-not-found' \
   'archive' \
   'git' \
+  'syntax-highlighting' \
   'history-substring-search' \
+  'autosuggestions' \
   'rsync' \
   'ssh' \
   'tmux' \
-  'python' \
   'completion' \
+  'contrib-prompt' \
   'prompt'
+
+#
+# Completion
+#
+
+#ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 #
 # Editor
@@ -93,7 +94,10 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'steeef'
+zstyle ':prezto:module:prompt' theme 'spaceship'
+
+# Disable cp,ln, mv and rm interactive variants
+zstyle ':prezto:module:utility' safe-ops 'no'
 
 #
 # Ruby
@@ -125,12 +129,13 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 # Set syntax highlighters.
 # By default, only the main highlighter is enabled.
-# zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'cursor' \
-#   'root'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
 #
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
@@ -143,13 +148,16 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 #
 
 # Auto set the tab and window titles.
-zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal' auto-title 'always'
 
 # Set the window title format.
 zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 
 # Set the tab title format.
 zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+
+# Set the multiplexer title format.
+zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 #
 # Tmux
