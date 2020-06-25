@@ -4,18 +4,30 @@
 DOTFILES_GIT=https://github.com/mpeterson/dotfiles.git
 ##############
 
+set -e
+
+function warn_prerequisites() {
+  echo "Error: Pre requisites failed installation"
+  exit 1
+}
+
+trap warn_prerequisites EXIT
+
+sudo=$(command -v sudo)
 apt=$(command -v apt-get)
 dnf=$(command -v dnf)
-yum=$(command -v yum)
 brew=$(command -v brew)
+
+if [ -n "$sudo" ]; then
+  echo "Error: sudo is needed to proceed" >&2
+  exit 1
+fi
 
 ## Detect the systems installer
 if [ -n "$apt" ]; then
   INSTALL='sudo apt-get -y install'
 elif [ -n "$dnf" ]; then
   INSTALL='sudo dnf -y install'
-elif [ -n "$yum" ]; then
-  INSTALL='sudo yum -y install'
 elif [ -n "$brew" ]; then
   INSTALL='brew install'
 else
@@ -24,7 +36,7 @@ else
 fi
 
 ## test if command exists
-check() {
+function check() {
   echo "Checking for ${1} .."
   if type -f "${1}" >/dev/null 2>&1; then
     return 1
@@ -44,14 +56,17 @@ check python3 && $INSTALL python3
 if [ -n "$apt" ]; then
   $INSTALL neovim python3-neovim
 elif [ -n "$dnf" ]; then
-  $INSTALL neovim python3-neovim
-elif [ -n "$yum" ]; then
-  $INSTALL https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-  $INSTALL neovim python3-neovim
+  $INSTALL epel-release
+  $INSTALL neovim
+  sudo python3 -m pip install --upgrade pynvim
 elif [ -n "$brew" ]; then
   $INSTALL neovim
   sudo python3 -m pip install --upgrade pynvim
 fi
+
+set +e
+
+trap - EXIT
 
 git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
 function dotfiles() {
