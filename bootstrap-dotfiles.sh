@@ -38,20 +38,18 @@ echo "Installing pre-requisites"
 check git && $INSTALL git
 check zsh && $INSTALL zsh
 check wget && $INSTALL wget
-check python2 && $INSTALL python2
 check python3 && $INSTALL python3
 
 # A bit more complex for neovim
 if [ -n "$apt" ]; then
-  $INSTALL neovim python3-neovim python-neovim
+  $INSTALL neovim python3-neovim
 elif [ -n "$dnf" ]; then
-  $INSTALL neovim python3-neovim python-neovim
+  $INSTALL neovim python3-neovim
 elif [ -n "$yum" ]; then
   $INSTALL https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-  $INSTALL neovim python3-neovim python2-neovim
+  $INSTALL neovim python3-neovim
 elif [ -n "$brew" ]; then
   $INSTALL neovim
-  sudo python2 -m pip install --upgrade pynvim
   sudo python3 -m pip install --upgrade pynvim
 fi
 
