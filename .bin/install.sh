@@ -69,6 +69,8 @@ else
 fi
 dotfiles checkout
 dotfiles config status.showUntrackedFiles no
+# remove the backup folder only if empty
+rmdir .dotfiles-backup 2>/dev/null
 
 # Install zprezto, with version pinning
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
