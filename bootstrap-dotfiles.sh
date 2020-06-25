@@ -4,7 +4,7 @@
 DOTFILES_GIT=https://github.com/mpeterson/dotfiles.git
 ##############
 
-set -e
+set -x
 
 function warn_prerequisites() {
   echo "Error: Pre requisites failed installation"
@@ -18,7 +18,7 @@ apt=$(command -v apt-get)
 dnf=$(command -v dnf)
 brew=$(command -v brew)
 
-if [ -n "$sudo" ]; then
+if [ -z "$sudo" ]; then
   echo "Error: sudo is needed to proceed" >&2
   exit 1
 fi
@@ -45,6 +45,8 @@ function check() {
     return 0
   fi
 }
+
+set -e
 
 echo "Installing pre-requisites"
 check git && $INSTALL git
