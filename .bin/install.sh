@@ -4,8 +4,7 @@
 DOTFILES_GIT=git@github.com:mpeterson/dotfiles.git
 ##############
 
-
-apt=$(command -v apt)
+apt=$(command -v apt-get)
 dnf=$(command -v dnf)
 yum=$(command -v yum)
 brew=$(command -v brew)
@@ -20,14 +19,14 @@ elif [ -n "$yum" ]; then
 elif [ -n "$brew" ]; then
   INSTALL='brew install'
 else
-  echo "Error: Your OS is not supported :(" >&2;
-  exit 1;
+  echo "Error: Your OS is not supported :(" >&2
+  exit 1
 fi
 
 ## test if command exists
-check () {
+check() {
   echo "Checking for ${1} .."
-  if type -f "${1}" > /dev/null 2>&1; then
+  if type -f "${1}" >/dev/null 2>&1; then
     return 1
   else
     echo "Installing ${1}"
@@ -57,20 +56,19 @@ elif [ -n "$brew" ]; then
 fi
 
 git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
-function config {
- /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
+function config() {
+  /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
 mkdir -p .config-backup
 config checkout
 if [ $? = 0 ]; then
-  echo "Checked out config.";
-  else
-    echo "Backing up pre-existing dot files.";
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
-fi;
+  echo "Checked out config."
+else
+  echo "Backing up pre-existing dot files."
+  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+fi
 config checkout
 config config status.showUntrackedFiles no
-
 
 # Install zprezto, with version pinning
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
