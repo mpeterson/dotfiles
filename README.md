@@ -1,6 +1,6 @@
 # Dotfiles
 
-The management system was taken from the [elegant solution that Atlassian published](https://www.atlassian.com/git/tutorials/dotfiles) with modifications to my taste.
+The management system was taken from the [elegant solution](https://www.atlassian.com/git/tutorials/dotfiles) that [Nicola Paolucci](https://twitter.com/durdn) published with modifications to my taste.
 
 ## Install
 
