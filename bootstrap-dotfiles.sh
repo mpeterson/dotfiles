@@ -74,6 +74,9 @@ git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
 function dotfiles() {
   /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
+# We want that only dotfiles will exist in a bootstrapped $HOME
+dotfiles config core.sparseCheckout true
+echo "/.*" > "$HOME/.cfg/info/sparse-checkout"
 mkdir -p .dotfiles-backup
 dotfiles checkout
 if [ $? = 0 ]; then
