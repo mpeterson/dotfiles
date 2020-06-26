@@ -96,6 +96,6 @@ git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
 popd
 
 # Install vim-plug for nvim
-sh -c 'curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim +PlugUpdate +PlugClean! +qall
