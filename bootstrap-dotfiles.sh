@@ -29,7 +29,6 @@ fi
 
 # Detect the system's package installer
 if [ -n "$apt" ]; then
-  original_debian_frontend=$DEBIAN_FRONTEND
   export DEBIAN_FRONTEND=noninteractive
   INSTALL="$sudo apt-get -y install"
 elif [ -n "$dnf" ]; then
@@ -73,10 +72,6 @@ elif [ -n "$brew" ]; then
   python3 -m pip install --user --upgrade pynvim typing_extensions
 fi
 
-if [ -n "$original_debian_frontend" ]; then
-  export DEBIAN_FRONTEND=$original_debian_frontend
-fi
-  
 set +e
 
 trap - EXIT
@@ -115,4 +110,15 @@ wget -q --show-progress -O "$HOME/.local/share/nvim/site/autoload/plug.vim" \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim -c 'PlugUpgrade | PlugUpdate | qall!'
 
+set +x
+
+cat << EOF
+Run the following command to replace the current shell with zsh for the all the sessions:
+
+chsh -s zsh
+
+And/Or run the following command to replace the current shell with zsh until exited:
+
 exec zsh -l
+
+EOF
