@@ -1,0 +1,27 @@
+git() {
+  # Check if Git is installed and user info is not yet set
+  if command -v git >/dev/null && [ -z "$(command git config user.name)" ]; then
+    echo "Seems you have git installed"
+    echo "What username do you want to use for git?"
+    read -r git_user
+    echo "And which mail should we use?"
+    read -r git_mail
+    
+    # Set defaults if both username and email are provided
+    if [ -n "$git_user" ] && [ -n "$git_mail" ]; then
+      command git config --global color.ui auto
+      command git config --global color.diff auto
+      command git config --global core.excludesfile "$HOME/.gitignore"
+      command git config --global alias.recent "reflog -20 --date=relative"
+      command git config --global alias.ci commit
+      command git config --global alias.st status
+      command git config --global alias.co checkout
+      command git config --global core.editor "$(command -v "$EDITOR")"
+      command git config --global user.name "$git_user"
+      command git config --global user.email "$git_mail"
+    fi
+  fi
+
+  # Pass all arguments to the actual 'git' command
+  command git "$@"
+}
