@@ -31,7 +31,7 @@ jobs:
         if: ${{ matrix.pkg_manager == 'dnf' }}
         
       - name: Bootstrap the agent
-        run: bash <(wget -q -O - https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)
+        run: bash <(curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)
   
       - name: Load zsh
         run: zsh -l
