@@ -22,3 +22,5 @@ jobs:
     - name: Load zsh
       run: zsh -l
 
+    - name: Create a desktop screenshot
+      uses: OrbitalOwen/desktop-screenshot-action@0.1
