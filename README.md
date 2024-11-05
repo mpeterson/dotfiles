@@ -4,7 +4,13 @@ The management system was taken from the [elegant solution](https://www.atlassia
 
 ## Install
 
+### curl
+
 `curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh | /bin/bash`
+
+### wget
+
+`wget -q -O - https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh | /bin/bash`
 
 ## Usage
 
