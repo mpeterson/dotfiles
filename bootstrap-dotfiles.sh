@@ -84,12 +84,12 @@ function dotfiles() {
 dotfiles config core.sparseCheckout true
 echo "/.*" > "$HOME/.cfg/info/sparse-checkout"
 echo "\!/.gitignore" >> "$HOME/.cfg/info/sparse-checkout"
-mkdir -p .dotfiles-backup
 dotfiles checkout
 if [ $? = 0 ]; then
   echo "Checked out config."
 else
   echo "Backing up pre-existing dot files."
+  mkdir -p .dotfiles-backup
   dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
 fi
 dotfiles checkout
@@ -104,7 +104,7 @@ pushd "${ZDOTDIR:-$HOME}/.zprezto"
 git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
 popd
 
-# Install vim-plug for nvim
+# Install vim-plug for nvim and install all plugins at once
 mkdir -p "$HOME/.local/share/nvim/site/autoload" && \
 wget -q --show-progress -O "$HOME/.local/share/nvim/site/autoload/plug.vim" \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
