@@ -27,7 +27,7 @@ jobs:
             
     steps:
       - name: Install wget
-        run: sudo dnf install wget
+        run: dnf install wget
         if: ${{ matrix.pkg_manager == 'dnf' }}
         
       - name: Bootstrap the agent
