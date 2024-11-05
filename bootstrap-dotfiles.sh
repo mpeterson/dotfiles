@@ -77,6 +77,7 @@ function dotfiles() {
 # We want that only dotfiles will exist in a bootstrapped $HOME
 dotfiles config core.sparseCheckout true
 echo "/.*" > "$HOME/.cfg/info/sparse-checkout"
+echo "\!/.gitignore" >> "$HOME/.cfg/info/sparse-checkout"
 mkdir -p .dotfiles-backup
 dotfiles checkout
 if [ $? = 0 ]; then
