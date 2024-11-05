@@ -1,3 +1,4 @@
+
 #
 # Browser
 #
@@ -40,8 +41,9 @@ export GO111MODULE=on
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  $HOME/.jenv/bin
+  $HOME/.krew/bin
   $HOME/bin
-  /usr/local/{bin,sbin}
   $GOPATH/bin
   $path
 )
@@ -73,3 +75,7 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
+
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
+[ -x "$(command -v jenv)" ] && eval "$(jenv init -)"
