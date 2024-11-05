@@ -29,7 +29,7 @@ fi
 
 # Detect the system's package installer
 if [ -n "$apt" ]; then
-  INSTALL="$sudo apt-get -y install"
+  INSTALL="$sudo DEBIAN_FRONTEND=noninteractive apt-get -y install"
 elif [ -n "$dnf" ]; then
   INSTALL="$sudo dnf -y install"
 elif [ -n "$brew" ]; then
