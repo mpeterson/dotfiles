@@ -21,6 +21,7 @@ jobs:
           - name: macos-latest
             os: macos-latest
           - name: rockylinux-9
+            os: ubuntu-latest
             container: 'rockylinux/rockylinux:9'
             
     steps:
