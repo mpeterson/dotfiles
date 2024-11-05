@@ -84,6 +84,7 @@ function dotfiles() {
 dotfiles config core.sparseCheckout true
 echo "/.*" > "$HOME/.cfg/info/sparse-checkout"
 echo "\!/.gitignore" >> "$HOME/.cfg/info/sparse-checkout"
+echo "\!/.github" >> "$HOME/.cfg/info/sparse-checkout"
 dotfiles checkout
 if [ $? = 0 ]; then
   echo "Checked out config."
