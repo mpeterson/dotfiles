@@ -44,8 +44,8 @@ fi
 bindkey -M viins '^R' history-incremental-search-backward
 
 # Load aliases
-if [[ -d "${ZDOTDIR:-$HOME}/.zalias.d" ]]; then
-  for file in "${ZDOTDIR:-$HOME}/.zalias.d/"*; do
+if [[ -d "${ZDOTDIR:-$HOME}/.zshrc.d" ]]; then
+  for file in "${ZDOTDIR:-$HOME}/.zshrc.d/"*; do
       source "$file"
   done
 fi
