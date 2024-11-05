@@ -23,13 +23,8 @@ jobs:
           - name: rockylinux-9
             os: ubuntu-latest
             container: 'rockylinux/rockylinux:9'
-            pkg_manager: dnf
             
-    steps:
-      - name: Install wget
-        run: dnf -y install wget
-        if: ${{ matrix.pkg_manager == 'dnf' }}
-        
+    steps:        
       - name: Bootstrap the agent
         run: bash <(curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)
   
