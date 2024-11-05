@@ -66,10 +66,10 @@ if [ -n "$apt" ]; then
 elif [ -n "$dnf" ]; then
   $INSTALL epel-release
   $INSTALL neovim
-  python3 -m pip install --user --upgrade pynvim typing_extensions
+  python3 -m pip install --user --upgrade --break-system-packages pynvim typing_extensions
 elif [ -n "$brew" ]; then
   $INSTALL neovim
-  python3 -m pip install --user --upgrade pynvim typing_extensions
+  python3 -m pip install --user --upgrade --break-system-packages pynvim typing_extensions
 fi
 
 set +e
