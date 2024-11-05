@@ -60,10 +60,10 @@ if [ -n "$apt" ]; then
 elif [ -n "$dnf" ]; then
   $INSTALL epel-release
   $INSTALL neovim
-  sudo python3 -m pip install --upgrade pynvim
+  python3 -m pip install --user --upgrade pynvim typing_extensions
 elif [ -n "$brew" ]; then
   $INSTALL neovim
-  sudo python3 -m pip install --upgrade pynvim
+  python3 -m pip install --user --upgrade pynvim typing_extensions
 fi
 
 set +e
@@ -90,10 +90,9 @@ dotfiles config status.showUntrackedFiles no
 # remove the backup folder only if empty
 rmdir .dotfiles-backup 2>/dev/null
 
-# Install zprezto, with version pinning
+# Install zprezto (to update after run zprezto-update
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 pushd "${ZDOTDIR:-$HOME}/.zprezto"
-git checkout ff91c8d410df3e6141248474389051c7ddcaf80a
 # continue with prezto-contrib
 git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
 popd
