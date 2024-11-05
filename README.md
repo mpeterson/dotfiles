@@ -6,11 +6,11 @@ The management system was taken from the [elegant solution](https://www.atlassia
 
 ### curl
 
-`curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh | /bin/bash`
+`bash <(curl -Lks https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)`
 
 ### wget
 
-`wget -q -O - https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh | /bin/bash`
+`bash <(wget -q -O - https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)`
 
 ## Usage
 
