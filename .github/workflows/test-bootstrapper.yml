@@ -11,18 +11,18 @@ jobs:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
+    
     strategy:
       fail-fast: false
       matrix:
-        name:
-          - ubuntu-latest
-        os: 
-          - ubuntu-latest
+        name: [ubuntu-latest]
+        os: [ubuntu-latest]
         include:
           - name: macos-latest
             os: macos-latest
           - name: rockylinux-9
-            container: rockylinux/rockylinux:9
+            container: 'rockylinux/rockylinux:9'
+            
     steps:
       - name: Bootstrap the agent
         run: bash <(wget -q -O - https://raw.githubusercontent.com/mpeterson/dotfiles/master/bootstrap-dotfiles.sh)
