@@ -113,6 +113,6 @@ popd
 mkdir -p "$HOME/.local/share/nvim/site/autoload" && \
 wget -q --show-progress -O "$HOME/.local/share/nvim/site/autoload/plug.vim" \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim +PlugUpdate +PlugClean! +qall ;
+nvim -c 'PlugUpgrade | PlugUpdate | qall!'
 
 exec zsh -l
