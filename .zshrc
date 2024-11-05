@@ -50,11 +50,6 @@ if [[ -d "${ZDOTDIR:-$HOME}/.zalias.d" ]]; then
   done
 fi
 
-# Load local aliases
-if [[ -s "${ZDOTDIR:-$HOME}/.zalias.local" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zalias.local"
-fi
-
 # Some sane git defaults
 if [ $(command -v 'git') -a -z "$(git config user.name)" ]
 then
