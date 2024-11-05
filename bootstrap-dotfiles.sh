@@ -13,27 +13,32 @@ function warn_prerequisites() {
 
 trap warn_prerequisites EXIT
 
-sudo=$(command -v sudo)
 apt=$(command -v apt-get)
 dnf=$(command -v dnf)
 brew=$(command -v brew)
 
-if [ -z "$sudo" ]; then
-  echo "Error: sudo is needed to proceed" >&2
-  exit 1
+if [ "$EUID" -ne 0 ]; then
+  sudo=$(command -v sudo)
+  if [ -z "$sudo" ]; then
+    echo "Error: sudo is needed to proceed" >&2
+    exit 1
+  fi
+else
+  sudo=""
 fi
 
-## Detect the systems installer
+# Detect the system's package installer
 if [ -n "$apt" ]; then
-  INSTALL='sudo apt-get -y install'
+  INSTALL="$sudo apt-get -y install"
 elif [ -n "$dnf" ]; then
-  INSTALL='sudo dnf -y install'
+  INSTALL="$sudo dnf -y install"
 elif [ -n "$brew" ]; then
-  INSTALL='brew install'
+  INSTALL="brew install"
 else
   echo "Error: Your OS is not supported :(" >&2
   exit 1
 fi
+
 
 ## test if command exists
 function check() {
