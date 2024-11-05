@@ -29,7 +29,9 @@ fi
 
 # Detect the system's package installer
 if [ -n "$apt" ]; then
-  INSTALL="$sudo DEBIAN_FRONTEND=noninteractive apt-get -y install"
+  original_debian_frontend=$DEBIAN_FRONTEND
+  export DEBIAN_FRONTEND=noninteractive
+  INSTALL="$sudo apt-get -y install"
 elif [ -n "$dnf" ]; then
   INSTALL="$sudo dnf -y install"
 elif [ -n "$brew" ]; then
@@ -71,6 +73,10 @@ elif [ -n "$brew" ]; then
   python3 -m pip install --user --upgrade pynvim typing_extensions
 fi
 
+if [ -n "$original_debian_frontend" ]; then
+  export DEBIAN_FRONTEND=$original_debian_frontend
+fi
+  
 set +e
 
 trap - EXIT
