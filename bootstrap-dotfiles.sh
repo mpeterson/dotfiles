@@ -13,35 +13,30 @@ function warn_prerequisites() {
 
 trap warn_prerequisites EXIT
 
-apt=$(command -v apt-get)
-dnf=$(command -v dnf)
-brew=$(command -v brew)
-
-if [ "$EUID" -ne 0 ]; then
-  sudo=$(command -v sudo)
-  if [ -z "$sudo" ]; then
-    echo "Error: sudo is needed to proceed" >&2
-    exit 1
+# Function to prepend sudo if necessary
+prepend_sudo_if_needed() {
+  local command="$1"
+  if [ "$EUID" -ne 0 ] && command -v sudo &> /dev/null; then
+    echo "sudo $command"
+  else
+    echo "$command"
   fi
-else
-  sudo=""
-fi
+}
 
 # Detect the system's package installer
-if [ -n "$apt" ]; then
+if command -v apt-get &> /dev/null; then
+  INSTALL=$(prepend_sudo_if_needed "apt-get -y install")
   export DEBIAN_FRONTEND=noninteractive
-  INSTALL="$sudo apt-get -y install"
-elif [ -n "$dnf" ]; then
-  INSTALL="$sudo dnf -y install"
-elif [ -n "$brew" ]; then
-  INSTALL="brew install"
+elif command -v dnf &> /dev/null; then
+  INSTALL=$(prepend_sudo_if_needed "dnf -y install")
+elif command -v brew &> /dev/null; then
+  INSTALL="brew install"  # No sudo needed for brew
 else
   echo "Error: Your OS is not supported :(" >&2
   exit 1
 fi
 
-
-## test if command exists
+# test if command exists
 function check() {
   echo "Checking for ${1} .."
   if type -f "${1}" >/dev/null 2>&1; then
