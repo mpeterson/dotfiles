@@ -26,9 +26,9 @@ prepend_sudo_if_needed() {
 }
 
 # Detect the system's package installer
-apt=$(command -v apt-get)
-dnf=$(command -v dnf)
-brew=$(command -v brew)
+apt=$(command -v apt-get || true)
+dnf=$(command -v dnf || true)
+brew=$(command -v brew || true)
 if [ -n "$apt" ]; then
   INSTALL=$(prepend_sudo_if_needed "apt-get -y install")
   export DEBIAN_FRONTEND=noninteractive
