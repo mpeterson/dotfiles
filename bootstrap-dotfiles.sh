@@ -72,8 +72,6 @@ elif [ -n "$brew" ]; then
   python3 -m pip install --user --upgrade --break-system-packages pynvim typing_extensions
 fi
 
-set +e
-
 trap - EXIT
 
 git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
