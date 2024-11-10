@@ -4,9 +4,11 @@
 DOTFILES_GIT="${DOTFILES_GIT:-https://github.com/mpeterson/dotfiles.git}"
 ##############
 
-set -x
+# Enable debug mode
+set -euxo pipefail
 
-function warn_prerequisites() {
+# Function to handle prerequisites failure
+warn_prerequisites() {
   echo "Error: Pre requisites failed installation"
   exit 1
 }
@@ -23,91 +25,95 @@ prepend_sudo_if_needed() {
   fi
 }
 
+# Detect the system's package installer
 apt=$(command -v apt-get)
 dnf=$(command -v dnf)
 brew=$(command -v brew)
-
-# Detect the system's package installer
 if [ -n "$apt" ]; then
   INSTALL=$(prepend_sudo_if_needed "apt-get -y install")
   export DEBIAN_FRONTEND=noninteractive
 elif [ -n "$dnf" ]; then
   INSTALL=$(prepend_sudo_if_needed "dnf -y install")
 elif [ -n "$brew" ]; then
-  INSTALL="brew install"  # No sudo needed for brew
+  INSTALL="brew install"
 else
   echo "Error: Your OS is not supported :(" >&2
   exit 1
 fi
 
-# test if command exists
-function check() {
-  echo "Checking for ${1} .."
-  if type -f "${1}" >/dev/null 2>&1; then
-    return 1
-  else
-    echo "Installing ${1}"
-    return 0
+# Function to check and install a command if it doesn't exist
+check_and_install() {
+  local cmd="$1"
+  echo "Checking for $cmd .."
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "Installing $cmd"
+    $INSTALL "$cmd"
   fi
 }
 
-set -e
-
+# Install prerequisites
 echo "Installing pre-requisites"
-check git && $INSTALL git
-check zsh && $INSTALL zsh
-check wget && $INSTALL wget
-check python3 && $INSTALL python3
+check_and_install git
+check_and_install zsh
+check_and_install wget
+check_and_install python3
 
-# A bit more complex for neovim
-if [ -n "$apt" ]; then
-  $INSTALL neovim python3-neovim
-elif [ -n "$dnf" ]; then
-  $INSTALL epel-release
-  $INSTALL neovim
-  $INSTALL pip
-  python3 -m pip install --user --upgrade pynvim typing_extensions
-elif [ -n "$brew" ]; then
-  $INSTALL neovim
-  python3 -m pip install --user --upgrade --break-system-packages pynvim typing_extensions
-fi
+# Install neovim with additional packages + plugins from dotfiles
+install_neovim() {
+  if [ -n "$apt" ]; then
+    $INSTALL neovim python3-neovim
+  elif [ -n "$dnf" ]; then
+    $INSTALL epel-release
+    $INSTALL neovim
+    $INSTALL pip
+    python3 -m pip install --user --upgrade pynvim typing_extensions
+  elif [ -n "$brew" ]; then
+    $INSTALL neovim
+    python3 -m pip install --user --upgrade --break-system-packages pynvim typing_extensions
+  fi
+
+  if ! command -v "nvim" &>/dev/null; then
+     echo "Installation of neovim failed"
+     return 1
+  fi
+  
+  # Install vim-plug for nvim and install all plugins at once
+  mkdir -p "$HOME/.local/share/nvim/site/autoload" && \
+  wget -q --show-progress -O "$HOME/.local/share/nvim/site/autoload/plug.vim" \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
+  nvim +PlugUpdate +PlugClean! +qall!
+}
 
 trap - EXIT
 
+# Clone dotfiles repository
 git clone --bare "$DOTFILES_GIT" "$HOME/.cfg"
-function dotfiles() {
+dotfiles() {
   /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
-# We want that only dotfiles will exist in a bootstrapped $HOME
 dotfiles config core.sparseCheckout true
 echo "/.*" > "$HOME/.cfg/info/sparse-checkout"
 echo "\!/.gitignore" >> "$HOME/.cfg/info/sparse-checkout"
 echo "\!/.github" >> "$HOME/.cfg/info/sparse-checkout"
-dotfiles checkout
-if [ $? = 0 ]; then
-  echo "Checked out config."
-else
+dotfiles checkout || {
   echo "Backing up pre-existing dot files."
   mkdir -p .dotfiles-backup
-  dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
-fi
-dotfiles checkout
+  dotfiles checkout 2>&1 | egrep "\s+\." | awk '{print $1}' | xargs -I{} mv {} .dotfiles-backup/{}
+  dotfiles checkout
+}
 dotfiles config status.showUntrackedFiles no
-# remove the backup folder only if empty
-rmdir .dotfiles-backup 2>/dev/null
 
-# Install zprezto (to update after run zprezto-update
+# Remove .doffiles-backup if empty
+rmdir .dotfiles-backup 2>/dev/null || true
+
+# Install zprezto (in the future, zprezto-update updates prezto)
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-pushd "${ZDOTDIR:-$HOME}/.zprezto"
-# continue with prezto-contrib
-git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
-popd
+(
+  cd "${ZDOTDIR:-$HOME}/.zprezto"
+  git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
+)
 
-# Install vim-plug for nvim and install all plugins at once
-mkdir -p "$HOME/.local/share/nvim/site/autoload" && \
-wget -q --show-progress -O "$HOME/.local/share/nvim/site/autoload/plug.vim" \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
-nvim +PlugUpdate +PlugClean! +qall!
+install_neovim || true
 
 set +x
 
