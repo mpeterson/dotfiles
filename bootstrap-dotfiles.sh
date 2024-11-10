@@ -23,13 +23,17 @@ prepend_sudo_if_needed() {
   fi
 }
 
+apt=$(command -v apt-get)
+dnf=$(command -v dnf)
+brew=$(command -v brew)
+
 # Detect the system's package installer
-if command -v apt-get &> /dev/null; then
+if [ -n "$apt" ]; then
   INSTALL=$(prepend_sudo_if_needed "apt-get -y install")
   export DEBIAN_FRONTEND=noninteractive
-elif command -v dnf &> /dev/null; then
+elif [ -n "$dnf" ]; then
   INSTALL=$(prepend_sudo_if_needed "dnf -y install")
-elif command -v brew &> /dev/null; then
+elif [ -n "$brew" ]; then
   INSTALL="brew install"  # No sudo needed for brew
 else
   echo "Error: Your OS is not supported :(" >&2
