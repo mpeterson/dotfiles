@@ -6,7 +6,13 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    'workspace 1', 'layout tiles', 'workspace-back-and-forth',
+    'workspace 2', 'layout accordion', 'workspace-back-and-forth',
+    'workspace 3', 'layout accordion', 'workspace-back-and-forth',
+    'workspace 4', 'layout accordion', 'workspace-back-and-forth',
+    'workspace q', 'layout accordion', 'workspace-back-and-forth',
+]
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#exec-on-workspace-change-callback
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -14,7 +20,7 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 ]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -103,10 +109,10 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-k = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-l = 'focus --boundaries-action wrap-around-the-workspace right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -172,25 +178,37 @@ down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
-[[on-window-detected]]
 # Teams
+[[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
+check-further-callbacks = true
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+if.window-title-regex-substring = '^(?!(Activity|Chat|Calendar|Copilot|Calls))'
+run = ['move-node-to-workspace q --focus-follows-window']
+
 # WhatsApp
+[[on-window-detected]]
 if.app-id = 'net.whatsapp.WhatsApp'
 run = ['move-node-to-workspace 1']
 
-[[on-window-detected]]
 # Signal
+[[on-window-detected]]
 if.app-id = 'org.whispersystems.signal-desktop'
 run = ['move-node-to-workspace 1']
 
-[[on-window-detected]]
 # Arc
+[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
-run = ['move-node-to-workspace 2']
+check-further-callbacks = true
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+if.window-title-regex-substring = '^(?!Space)'
+run = ['layout tiling', 'move-node-to-workspace 2']
 
 [[on-window-detected]]
 # Edge
