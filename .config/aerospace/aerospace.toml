@@ -8,6 +8,11 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
+# See: https://nikitabobko.github.io/AeroSpace/guide#exec-on-workspace-change-callback
+exec-on-workspace-change = ['/bin/bash', '-c',
+    '~/.config/aerospace/on-workspace-change.sh $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE'
+]
+
 # Start AeroSpace at login
 start-at-login = false
 
