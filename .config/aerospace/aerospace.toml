@@ -223,6 +223,7 @@ run = ['move-node-to-workspace 3']
 [[on-window-detected]]
 # Outlook
 if.app-id = 'com.microsoft.Outlook'
+if.window-title-regex-substring = '(?!^.+ Reminder)'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
