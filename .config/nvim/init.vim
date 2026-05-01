@@ -6,13 +6,14 @@
     " Dependencies {
         Plug 'tpope/vim-repeat'   " required by surround, commentary
     " }
-    " Appareance {
+    " Appeareance {
         Plug 'altercation/vim-colors-solarized'
         Plug 'zhaocai/GoldenView.Vim'
         Plug 'mhinz/vim-signify'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'rakr/vim-one'
+        Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     " }
     " Movements {
         Plug 'sickill/vim-pasta'
@@ -147,13 +148,13 @@
       endif
     " endif
     " Colorscheme and background
-    colorscheme one
+    colorscheme catppuccin-macchiato
     set background=dark
     let g:one_allow_italics = 1
 
     " vim-airline {
     let g:airline_powerline_fonts = 1
-    let g:airline_theme = 'one'
+    let g:airline_theme = 'catppuccin'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#whitespace#enabled = 0
     " }
