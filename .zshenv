@@ -1,81 +1,49 @@
-
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 #
-# Browser
-#
+# Do not modify this file unless you know exactly what you are doing.
+# It is strongly recommended to keep all shell customization and configuration
+# (including exported environment variables such as PATH) in ~/.zshrc or in
+# files sourced from ~/.zshrc. If you are certain that you must export some
+# environment variables in ~/.zshenv, do it where indicated by comments below.
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+if [ -n "${ZSH_VERSION-}" ]; then
+  # If you are certain that you must export some environment variables
+  # in ~/.zshenv (see comments at the top!), do it here:
+  #
+  #   export GOPATH=$HOME/go
+  export GOPATH=$HOME/go
+  export GO111MODULE=on
+
+  # Source additional local files if they exist.
+  #
+  # Do not change anything else in this file.
+
+  : ${ZDOTDIR:=~}
+  setopt no_global_rcs
+  [[ -o no_interactive && -z "${Z4H_BOOTSTRAPPING-}" ]] && return
+  setopt no_rcs
+  unset Z4H_BOOTSTRAPPING
 fi
 
-#
-# Editors
-#
+Z4H_URL="https://raw.githubusercontent.com/romkatv/zsh4humans/v5"
+: "${Z4H:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh4humans/v5}"
 
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
+umask o-w
 
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-  export LC_ALL='en_US.UTF-8'
+if [ ! -e "$Z4H"/z4h.zsh ]; then
+  mkdir -p -- "$Z4H" || return
+  >&2 printf '\033[33mz4h\033[0m: fetching \033[4mz4h.zsh\033[0m\n'
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL -- "$Z4H_URL"/z4h.zsh >"$Z4H"/z4h.zsh.$$ || return
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O-   -- "$Z4H_URL"/z4h.zsh >"$Z4H"/z4h.zsh.$$ || return
+  else
+    >&2 printf '\033[33mz4h\033[0m: please install \033[32mcurl\033[0m or \033[32mwget\033[0m\n'
+    return 1
+  fi
+  mv -- "$Z4H"/z4h.zsh.$$ "$Z4H"/z4h.zsh || return
 fi
 
-#
-# Paths
-#
+. "$Z4H"/z4h.zsh || return
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-export GOPATH=$HOME/go
-export GO111MODULE=on
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  $HOME/.jenv/bin
-  $HOME/.krew/bin
-  $HOME/bin
-  $GOPATH/bin
-  $path
-)
-
-#
-# Less
-#
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# Set the Less input preprocessor.
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
-fi
-
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
-[ -x "$(command -v jenv)" ] && eval "$(jenv init -)"
+setopt rcs

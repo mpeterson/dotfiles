@@ -1,1 +1,0 @@
-alias ls="`whence ls` -l" # Use whence so we don't overwrite the previous alias

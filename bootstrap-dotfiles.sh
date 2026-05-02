@@ -106,13 +106,6 @@ dotfiles config status.showUntrackedFiles no
 # Remove .doffiles-backup if empty
 rmdir .dotfiles-backup 2>/dev/null || true
 
-# Install zprezto (in the future, zprezto-update updates prezto)
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-(
-  cd "${ZDOTDIR:-$HOME}/.zprezto"
-  git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
-)
-
 install_neovim || true
 
 set +x
