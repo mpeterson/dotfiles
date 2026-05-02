@@ -136,6 +136,7 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 0'
 alt-q = 'workspace q'
+alt-w = 'workspace w'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -149,11 +150,12 @@ alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
 alt-shift-q = 'move-node-to-workspace q --focus-follows-window'
+alt-shift-w = 'move-node-to-workspace w --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-alt-tab = 'workspace-back-and-forth'
+alt-shift-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+#alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
@@ -199,39 +201,57 @@ run = ['move-node-to-workspace 1']
 if.app-id = 'org.whispersystems.signal-desktop'
 run = ['move-node-to-workspace 1']
 
-# Arc
+# The Boring Notch
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-check-further-callbacks = true
+if.app-id = 'theboringteam.boringnotch'
 run = 'layout floating'
 
-[[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-if.window-title-regex-substring = '^(?!Space)'
-run = ['layout tiling', 'move-node-to-workspace 2']
-
-[[on-window-detected]]
 # Edge
+[[on-window-detected]]
 if.app-id = 'com.microsoft.edgemac'
 run = ['move-node-to-workspace 2']
 
+# Brave
 [[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = ['move-node-to-workspace 2']
+
+# Zen
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = ['move-node-to-workspace 2']
+
 # Kitty
+[[on-window-detected]]
 if.app-id = 'net.kovidgoyal.kitty'
 run = ['move-node-to-workspace 3']
 
-[[on-window-detected]]
 # Outlook
+[[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
 if.window-title-regex-substring = '(?!^.+ Reminder)'
 run = ['move-node-to-workspace 3']
 
-[[on-window-detected]]
 # Obsidian
+[[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = ['move-node-to-workspace 4']
 
-[[on-window-detected]]
 # MS To Do
+[[on-window-detected]]
 if.app-id = 'com.microsoft.to-do-mac'
 run = ['move-node-to-workspace 4']
+
+# RDP
+[[on-window-detected]]
+if.app-id = 'com.microsoft.rdc.macos'
+run = ['move-node-to-workspace 8']
+
+# Discord
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = ['move-node-to-workspace w']
+
+# Default
+[[on-window-detected]]
+run = ['move-node-to-workspace 9']
